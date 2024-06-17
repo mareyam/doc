@@ -1,4 +1,5 @@
 import AEC_Verification from "./AEC Verification";
+import Getting_Started from "./Getting Started";
 import Asic_Msic_Verification from "./Asic Msic Verification";
 import Document_Verification from "./Document_Verification";
 import Birth_Certificate_Verification from "./Birth_Certificate_Verification";
@@ -13,6 +14,7 @@ import Medicare_Verification from "./Medicare Verification";
 import Passport_Verification from "./Passport_Verification";
 
 const API1 = {
+  Getting_Started,
   Document_Verification,
   Passport_Verification,
   Citizenship_Verification,
