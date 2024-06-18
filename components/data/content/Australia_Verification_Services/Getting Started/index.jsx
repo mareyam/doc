@@ -63,7 +63,7 @@ const Details = () => {
       <Heading fontSize="24" w="full">
         Getting Started
       </Heading>
-      <Text w="full">
+      <Text w="full" >
         This guide provides clear instructions on how to integrate the Sanctum
         API into your application for authentication and user management. Follow
         the steps and examples below to get started quickly and effectively.

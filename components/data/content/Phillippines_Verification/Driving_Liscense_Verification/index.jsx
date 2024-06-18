@@ -38,6 +38,7 @@ import {
 
 const Overview = () => {
   const bgColor = useColorModeValue("gray.50", "whiteAlpha.200");
+  const isDesktop = useBreakpointValue({ base: false, md: true });
 
   return (
     <VStack textAlign="left" bgColor={bgColor} p="4" rounded="lg">
@@ -46,7 +47,11 @@ const Overview = () => {
       </Heading>
       <Text w="full">
         Endpoint: &nbsp;
-        <Code>{` POST /v1/verification/philippines/drivinglicense `}</Code>
+        <Code>
+          {isDesktop
+            ? ` POST /v1/verification/philippines/drivinglicense`
+            : ` POST /v1/verification/philippines/   drivinglicense`}
+        </Code>
         &nbsp;
       </Text>
     </VStack>

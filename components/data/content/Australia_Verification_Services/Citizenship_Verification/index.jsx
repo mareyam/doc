@@ -50,6 +50,7 @@ const Details = () => {
   const bgColor = useColorModeValue("gray.50", "whiteAlpha.200");
   const [currentCode, setCurrentCode] = useState("");
   const { onCopy, hasCopied } = useClipboard(currentCode);
+  const isDesktop = useBreakpointValue({ base: false, md: true });
 
   const handleCopy = (code) => {
     setCurrentCode(code);
@@ -65,14 +66,20 @@ const Details = () => {
         Endpoint: &nbsp;
         <Tooltip label={hasCopied ? "copied" : "Click to copy"}>
           <Code
-            whiteSpace="nowrap"
+            whiteSpace="pre-wrap"
+            wordWrap="break-word"
+            overflowWrap="break-word"
             cursor="pointer"
             onClick={() =>
               handleCopy(
                 `POST /v1/verification/australia/certificate/citizenship`
               )
             }
-          >{`POST /v1/verification/australia/certificate/citizenship`}</Code>
+          >
+            {isDesktop
+              ? `POST /v1/verification/australia/certificate/citizenship`
+              : `POST /v1/verification/australia/   certificate/citizenship`}
+          </Code>
         </Tooltip>
         &nbsp;
       </Text>
@@ -81,26 +88,27 @@ const Details = () => {
 };
 
 const Example = () => {
-  const jsonCode = `{
-Header:
+  const jsonCode = `
 {
-  "accept": "application/json",
-  "Authorization": "{{accessToken}}"
-}
-Body (form-data):
-form
- 
-image1=@/path/to/your/image1.jpg;type=image/jpeg
-image2=@/path/to/your/image2.png;type=image/png
-  }`;
+  "Header": {
+    "accept": "application/json",
+    "Authorization": "{{accessToken}}"
+  },
+  "Body": {
+    "form-data": {
+      "image1": "@/path/to/your/image1.jpg;type=image/jpeg",
+      "image2": "@/path/to/your/image2.png;type=image/png"
+    }
+  }
+}`;
 
   const response = `{
-200 OK: Verification successful.
-401 Unauthorized: Invalid or missing access token.
+{
+  "200 OK": "Verification successful.",
+  "401 Unauthorized": "Invalid or missing access token."
+}
 Example cURL:
-
-bash
- 
+bash 
 curl -X 'POST' \
   '{{baseUrl}}/v1/verification/australia/certificate/citizenship' \
   -H 'accept: application/json' \
@@ -112,8 +120,7 @@ curl -X 'POST' \
         "family_name": "Walker",
         "given_name": "Sarah",
         "stock_number": "75213019409"
-      }'
-  }`;
+     }`;
 
   const { onCopy, hasCopied } = useClipboard(JSON.stringify(jsonCode, null, 2));
   const [showTransition, setShowTransition] = useState(false);

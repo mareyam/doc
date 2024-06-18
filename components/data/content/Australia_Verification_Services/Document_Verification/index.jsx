@@ -52,6 +52,7 @@ const Details = () => {
   const [showTransition, setShowTransition] = useState(false);
   const [currentCode, setCurrentCode] = useState("");
   const { onCopy, hasCopied } = useClipboard(currentCode);
+  const isDesktop = useBreakpointValue({ base: false, md: true });
 
   const handleCopy = (code) => {
     setCurrentCode(code);
@@ -60,13 +61,21 @@ const Details = () => {
 
   const code1 =
     "b2b-dev.idmetagroup.com/api/v1/verification/document_verification";
+
+  const code1Mobile =
+    "b2b-dev.idmetagroup.com/api/v1/         verification/document_verification";
+
   const code2 =
     "POST b2b-dev.idmetagroup.com/api/v1/verification/document_verification";
+
+  const code2Mobile =
+    "POST b2b-dev.idmetagroup.com/api/v1/     verification/document_verification";
+
   const accessCode1 = "accessToken";
   const accessCode2 = "accessToken";
 
   return (
-    <VStack textAlign="left" bgColor={bgColor} p="4" rounded="lg">
+    <VStack p="4" textAlign="left" bgColor={bgColor} rounded="lg">
       <Heading fontSize="24" w="full">
         Document Verification Services
       </Heading>
@@ -86,10 +95,14 @@ const Details = () => {
           label={hasCopied || currentCode == code1 ? "copied" : "Click to copy"}
         >
           <Code
-            // whiteSpace="nowrap"
             cursor="pointer"
+            whiteSpace="pre-wrap"
+            wordWrap="break-word"
+            overflowWrap="break-word"
             onClick={() => handleCopy(code1)}
-          >{`${code1}`}</Code>
+          >
+            {isDesktop ? code1 : code1Mobile}
+          </Code>
         </Tooltip>
         &nbsp;
         <br />

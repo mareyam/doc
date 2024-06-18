@@ -1,5 +1,11 @@
 import React from "react";
-import { Box, Button, IconButton, useColorMode } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  IconButton,
+  Switch,
+  useColorMode,
+} from "@chakra-ui/react";
 import { IoIosArrowDown } from "react-icons/io";
 import { CiSearch } from "react-icons/ci";
 import MobileSidebar from "../sidebar/MobileSidebar";
@@ -9,7 +15,7 @@ import SearchModal from "@/components/common/search_bar";
 const MobileNavbar = () => {
   const { showMenu, setShowMenu, selectedMenu, isOpenSearchModal } =
     useStateManagementStore();
-  const { colorMode } = useColorMode();
+  const { colorMode, toggleColorMode } = useColorMode();
 
   return (
     <>
@@ -17,6 +23,7 @@ const MobileNavbar = () => {
         bgColor="#1a202c"
         pos="fixed"
         w="full"
+        zIndex="20"
         py="2"
         justifyContent="space-between"
         display="flex"
@@ -42,6 +49,15 @@ const MobileNavbar = () => {
             icon={<IoIosArrowDown size={12} />}
           />
         </Button>
+        <Box pos="absolute" top="4" right="4">
+          <Switch
+            id="color-mode-switch"
+            colorScheme={colorMode == "dark" && "purple"}
+            isChecked={colorMode === "dark"}
+            onChange={toggleColorMode}
+            size="sm"
+          />
+        </Box>
       </Box>
       {showMenu && <MobileSidebar />}
       {isOpenSearchModal && <SearchModal />}

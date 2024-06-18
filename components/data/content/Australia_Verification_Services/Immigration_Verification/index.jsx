@@ -50,6 +50,7 @@ const Details = () => {
   const bgColor = useColorModeValue("gray.50", "whiteAlpha.200");
   const [currentCode, setCurrentCode] = useState("");
   const { onCopy, hasCopied } = useClipboard(currentCode);
+  const isDesktop = useBreakpointValue({ base: false, md: true });
 
   const handleCopy = (code) => {
     setCurrentCode(code);
@@ -65,12 +66,18 @@ const Details = () => {
         Endpoint: &nbsp;
         <Tooltip label={hasCopied ? "copied" : "Click to copy"}>
           <Code
-            whiteSpace="nowrap"
+            whiteSpace="pre-wrap"
+            wordWrap="break-word"
+            overflowWrap="break-word"
             cursor="pointer"
             onClick={() =>
               handleCopy(`POST /v1/verification/australia/immigration`)
             }
-          >{`POST /v1/verification/australia/immigration`}</Code>
+          >
+            {isDesktop
+              ? `POST /v1/verification/australia/immigration`
+              : `POST /v1/verification/australia/immigration`}
+          </Code>
         </Tooltip>
         &nbsp;
       </Text>

@@ -24,6 +24,7 @@ const MobileSidebar = () => {
       top="14"
       bgColor="#1a202c"
       px="8"
+      h="92dvh"
       zIndex="1"
     >
       {APIData?.map((api, index) => (

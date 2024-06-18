@@ -47,6 +47,7 @@ export default National_Police_Verification;
 
 const Details = () => {
   const bgColor = useColorModeValue("gray.50", "whiteAlpha.200");
+  const isDesktop = useBreakpointValue({ base: false, md: true });
 
   return (
     <VStack textAlign="left" bgColor={bgColor} p="4" rounded="lg">
@@ -55,7 +56,11 @@ const Details = () => {
       </Heading>
       <Text w="full">
         Endpoint: &nbsp;
-        <Code>{` POST /v1/verification/philippines/nationalpolice`}</Code>
+        <Code>
+          {isDesktop
+            ? ` POST /v1/verification/philippines/nationalpolice`
+            : ` POST /v1/verification/philippines/   nationalpolice`}
+        </Code>
         &nbsp;
       </Text>
     </VStack>

@@ -66,12 +66,13 @@ const Details = () => {
         <Tooltip label={hasCopied ? "copied" : "Click to copy"}>
           <Code
             // whiteSpace="nowrap"
-            fontSize="12"
+
             cursor="pointer"
             onClick={() => handleCopy(`POST /v1/verification/australia/aec`)}
           >{`POST /v1/verification/australia/aec`}</Code>
         </Tooltip>
-        &nbsp;This document covers the main verification endpoints available for
+        <br />
+        This document covers the main verification endpoints available for
         Australian services. Ensure that the access token is valid and the
         request headers and body follow the specified formats for successful API
         interactions. &nbsp;

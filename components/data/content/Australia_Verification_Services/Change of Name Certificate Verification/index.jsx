@@ -50,6 +50,7 @@ const Details = () => {
   const bgColor = useColorModeValue("gray.50", "whiteAlpha.200");
   const [currentCode, setCurrentCode] = useState("");
   const { onCopy, hasCopied } = useClipboard(currentCode);
+  const isDesktop = useBreakpointValue({ base: false, md: true });
 
   const handleCopy = (code) => {
     setCurrentCode(code);
@@ -70,7 +71,11 @@ const Details = () => {
                 `POST /v1/verification/australia/certificate/changeOfName`
               )
             }
-          >{`POST /v1/verification/australia/certificate/changeOfName`}</Code>
+          >
+            {isDesktop
+              ? `POST /v1/verification/australia/certificate/changeOfName`
+              : `POST /v1/verification/australia/certificate   /changeOfName`}
+          </Code>
         </Tooltip>
         &nbsp;
       </Text>
