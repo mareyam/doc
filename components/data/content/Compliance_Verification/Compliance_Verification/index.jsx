@@ -55,7 +55,7 @@ const Details = () => {
         All API requests should be made to the following base URL:
         <br />
         &nbsp;
-        <Code>{`{{ BaseURL }}`}</Code>&nbsp;
+        <Code>{`b2b-dev.idmetagroup.com/api/`}</Code>&nbsp;
         <br />
         <Text fontWeight="600" fontSize="16">
           Authentication

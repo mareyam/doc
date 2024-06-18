@@ -17,7 +17,7 @@ const Textt = () => {
       </Heading>
       <Text w="full">
         The base URL for all endpoints is: <br />
-        <Code mt="4"> arduino</Code>
+        <Code mt="4"> b2b-dev.idmetagroup.com/api</Code>
       </Text>
     </VStack>
   );

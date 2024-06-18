@@ -16,6 +16,7 @@ import React, { useState, useEffect } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { okaidia } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { MdDone, MdOutlineCopyAll } from "react-icons/md";
+import { atomOneLight } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 
 const Change_of_Name_Certificate_Verification = () => {
   const isDesktop = useBreakpointValue({ base: false, md: true });
@@ -140,10 +141,11 @@ curl -X 'POST' \
         customStyle={{
           height: "100%",
           width: "100%",
-          backgroundColor: colorMode == "dark" ? "transparent" : "transparent",
+          backgroundColor:
+            colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
         }}
-        language="json"
-        style={okaidia}
+        language="applescript"
+        style={colorMode == "dark" ? okaidia : atomOneLight}
         wrapLongLines
       >
         {jsonCode}
@@ -153,10 +155,11 @@ curl -X 'POST' \
         customStyle={{
           height: "100%",
           width: "100%",
-          backgroundColor: colorMode == "dark" ? "transparent" : "transparent",
+          backgroundColor:
+            colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
         }}
-        language="json"
-        style={okaidia}
+        language="applescript"
+        style={colorMode == "dark" ? okaidia : atomOneLight}
         wrapLongLines
       >
         {response}

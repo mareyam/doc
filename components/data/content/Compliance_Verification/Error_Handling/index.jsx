@@ -15,6 +15,7 @@ import React, { useState, useEffect } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { okaidia } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { MdDone, MdOutlineCopyAll } from "react-icons/md";
+import { atomOneLight } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 
 const Error_Handling = () => {
   const isDesktop = useBreakpointValue({ base: false, md: true });

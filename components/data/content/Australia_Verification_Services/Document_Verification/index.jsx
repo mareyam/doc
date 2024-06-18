@@ -14,10 +14,11 @@ import {
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { MdDone, MdOutlineCopyAll } from "react-icons/md";
+import { atomOneLight } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { okaidia } from "react-syntax-highlighter/dist/cjs/styles/prism";
-
 import React from "react";
+import { stackoverflowLight } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 const Document_Verification = () => {
   const isDesktop = useBreakpointValue({ base: false, md: true });
 
@@ -608,10 +609,10 @@ curl -X POST b2b-dev.idmetagroup.com/api/v1/verification/document_verification \
             height: "100%",
             width: "100%",
             backgroundColor:
-              colorMode == "dark" ? "transparent" : "transparent",
+              colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
           }}
-          language="json"
-          style={okaidia}
+          language="applescript"
+          style={colorMode == "dark" ? okaidia : atomOneLight}
           wrapLongLines
         >
           {jsonCode}
@@ -644,8 +645,8 @@ curl -X POST b2b-dev.idmetagroup.com/api/v1/verification/document_verification \
             backgroundColor:
               colorMode == "dark" ? "transparent" : "transparent",
           }}
-          language="json"
-          style={okaidia}
+          language="applescript"
+          style={colorMode == "dark" ? okaidia : stackoverflowLight}
           wrapLongLines
         >
           {response}

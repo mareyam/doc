@@ -17,7 +17,7 @@ const Variables = () => {
       </Heading>
       <Text w="full">
         The following variable is used in the request URLs: <br />
-        <Code>{`{{ BaseURL }}: http://idmeta-api.test`}</Code>
+        <Code>{`b2b-dev.idmetagroup.com/api/: http://idmeta-api.test`}</Code>
       </Text>
     </VStack>
   );

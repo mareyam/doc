@@ -15,6 +15,8 @@ import React, { useState, useEffect } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { okaidia } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { MdDone, MdOutlineCopyAll } from "react-icons/md";
+import { atomOneLight } from "react-syntax-highlighter/dist/cjs/styles/hljs";
+
 import { vs } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { stackoverflowDark } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import { stackoverflowLight } from "react-syntax-highlighter/dist/cjs/styles/hljs";
@@ -77,9 +79,7 @@ const Details = () => {
       </Text>
       <Code>Request</Code>
       <Code>Method: GET URL: /sanctum/csrf-cookie</Code>
-      {/* <Code>
-        curl -X GET "https://b2b-dev.idmetagroup.com/sanctum/csrf-cookie"
-      </Code> */}
+
       <Text>
         This request will set the CSRF token in the cookies, which can be used
         in subsequent requests.
@@ -126,7 +126,7 @@ const Details = () => {
         Ensure User is Authenticated Make sure the user is authenticated by
         following the steps in the User Authentication section. Get User
         Information Make a GET request to /api/user to fetch the authenticated
-        user's details.
+        user details.
       </Text>
       <Code>Request</Code>
       <Code>Method: GET URL: /api/user</Code>
@@ -216,8 +216,8 @@ const Example = () => {
           border: "none",
           boxShadow: "none",
         }}
-        language="json"
-        style={colorMode == "dark" ? stackoverflowDark : stackoverflowLight}
+        language="applescript"
+        style={colorMode == "dark" ? okaidia : stackoverflowLight}
         wrapLongLines
       >
         {CSRFCookie}
@@ -236,8 +236,8 @@ const Example = () => {
           border: "none",
           boxShadow: "none",
         }}
-        language="json"
-        style={colorMode == "dark" ? stackoverflowDark : stackoverflowLight}
+        language="applescript"
+        style={colorMode == "dark" ? okaidia : stackoverflowLight}
         wrapLongLines
       >
         {UserAuth}
@@ -256,8 +256,8 @@ const Example = () => {
           border: "none",
           boxShadow: "none",
         }}
-        language="json"
-        style={colorMode == "dark" ? stackoverflowDark : stackoverflowLight}
+        language="applescript"
+        style={colorMode == "dark" ? okaidia : stackoverflowLight}
         wrapLongLines
       >
         {LoginRequest}
@@ -276,8 +276,8 @@ const Example = () => {
           border: "none",
           boxShadow: "none",
         }}
-        language="json"
-        style={colorMode == "dark" ? stackoverflowDark : stackoverflowLight}
+        language="applescript"
+        style={colorMode == "dark" ? okaidia : stackoverflowLight}
         wrapLongLines
       >
         {RetrieveUserInformation}
@@ -296,8 +296,8 @@ const Example = () => {
           border: "none",
           boxShadow: "none",
         }}
-        language="json"
-        style={colorMode == "dark" ? stackoverflowDark : stackoverflowLight}
+        language="applescript"
+        style={colorMode == "dark" ? okaidia : stackoverflowLight}
         wrapLongLines
       >
         {Logout}
@@ -320,8 +320,8 @@ const Example = () => {
           border: "none",
           boxShadow: "none",
         }}
-        language="json"
-        style={colorMode == "dark" ? stackoverflowDark : stackoverflowLight}
+        language="applescript"
+        style={colorMode == "dark" ? okaidia : stackoverflowLight}
         wrapLongLines
       >
         {PreRequestScript}
