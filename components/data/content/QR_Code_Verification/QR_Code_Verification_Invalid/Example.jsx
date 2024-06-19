@@ -55,7 +55,7 @@ const Example = () => {
       >
         {jsonCode}
       </SyntaxHighlighter>
-      <Box pos="absolute" top="4" right={{ base: "-4", xl: "2", "2xl": "2" }}>
+      <Box pos="absolute" top="4" right={{ base: "2", xl: "2", "2xl": "2" }}>
         <IconButton
           onClick={onCopy}
           aria-label={hasCopied ? "Copied" : "Copy"}

@@ -63,7 +63,7 @@ const Details = () => {
       <Heading fontSize="24" w="full">
         Getting Started
       </Heading>
-      <Text w="full" >
+      <Text w="full">
         This guide provides clear instructions on how to integrate the Sanctum
         API into your application for authentication and user management. Follow
         the steps and examples below to get started quickly and effectively.
@@ -327,7 +327,7 @@ const Example = () => {
         {PreRequestScript}
       </SyntaxHighlighter>
 
-      <Box pos="absolute" top="4" right={{ base: "-4", xl: "2", "2xl": "2" }}>
+      <Box pos="absolute" top="4" right={{ base: "2", xl: "2", "2xl": "2" }}>
         <IconButton
           onClick={onCopy}
           aria-label={hasCopied ? "Copied" : "Copy"}
