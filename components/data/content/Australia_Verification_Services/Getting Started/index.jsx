@@ -15,10 +15,6 @@ import React, { useState, useEffect } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { okaidia } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { MdDone, MdOutlineCopyAll } from "react-icons/md";
-import { atomOneLight } from "react-syntax-highlighter/dist/cjs/styles/hljs";
-
-import { vs } from "react-syntax-highlighter/dist/cjs/styles/prism";
-import { stackoverflowDark } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import { stackoverflowLight } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 
 const Getting_Started = () => {

@@ -49,7 +49,6 @@ export default Document_Verification;
 
 const Details = () => {
   const bgColor = useColorModeValue("gray.50", "whiteAlpha.200");
-  const [showTransition, setShowTransition] = useState(false);
   const [currentCode, setCurrentCode] = useState("");
   const { onCopy, hasCopied } = useClipboard(currentCode);
   const isDesktop = useBreakpointValue({ base: false, md: true });
@@ -75,11 +74,21 @@ const Details = () => {
   const accessCode2 = "accessToken";
 
   return (
-    <VStack p="4" textAlign="left" bgColor={bgColor} rounded="lg">
+    <VStack
+      alignItems="flex-start"
+      textAlign="left"
+      bgColor={bgColor}
+      p="4"
+      rounded="lg"
+      whiteSpace="pre-wrap"
+      wordWrap="break-word"
+      overflowWrap="break-word"
+      wordBreak="break-all"
+    >
       <Heading fontSize="24" w="full">
         Document Verification Services
       </Heading>
-      <Text>
+      <Text wrapLongLines>
         This document provides a guide on how to use the API endpoints available
         for various verification services in Australia, such as visa, passport,
         citizenship, and more. The general setup and request structure are
