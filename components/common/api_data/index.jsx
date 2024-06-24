@@ -1,3 +1,4 @@
+import API from "@/components/data/content/Getting_Started";
 import API1 from "@/components/data/content/Australia_Verification_Services";
 import API2 from "@/components/data/content/Biometrics_Verification";
 import API3 from "@/components/data/content/Compliance_Verification";
@@ -6,6 +7,10 @@ import API5 from "@/components/data/content/Phillippines_Verification";
 import API6 from "@/components/data/content/Indonesia_Verification_Currently_Forbidden";
 
 const APIData = [
+  {
+    name: "Getting Started",
+    data: API,
+  },
   {
     name: "Documents Verification Services",
     data: API1,
