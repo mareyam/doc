@@ -10,6 +10,11 @@ import {
   useColorModeValue,
   Box,
   IconButton,
+  Tabs,
+  TabList,
+  Tab,
+  TabPanels,
+  TabPanel,
 } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -150,20 +155,84 @@ const Example = () => {
   curl -X GET "https://b2b-dev.idmetagroup.com/sanctum/csrf-cookie"
 }`;
 
+  const php1 = `{
+function getCSRFCookie() {
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, "https://b2b-dev.idmetagroup.com/sanctum/csrf-cookie");
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    return $response;
+}
+}`;
+
   const UserAuth = `{
   curl -X GET "https://b2b-dev.idmetagroup.com/sanctum/csrf-cookie"
 }`;
 
+  const php2 = `{
+function userAuth() {
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, "https://b2b-dev.idmetagroup.com/sanctum/csrf-cookie");
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    return $response;
+}
+
+}`;
   const LoginRequest = `{
   curl Copy code curl -X POST "https://b2b-dev.idmetagroup.com/login"\-H "Accept: application/json"\-H "X-XSRF-TOKEN: [CSRF token]"\-F "email=example@domain.com"\-F"password=yourpassword"
+}`;
+
+  const php3 = `{
+function loginRequest($email, $password, $csrfToken) {
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, "https://b2b-dev.idmetagroup.com/login");
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        "Accept: application/json",
+        "X-XSRF-TOKEN: $csrfToken"
+    ]);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, [
+        'email' => $email,
+        'password' => $password
+    ]);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    return $response;
+}
 }`;
 
   const RetrieveUserInformation = `{
    curl Copy code curl -X GET "https://b2b-dev.idmetagroup.com/api/user"
 }`;
 
+  const php4 = `{
+function retrieveUserInformation() {
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, "https://b2b-dev.idmetagroup.com/api/user");
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    return $response;
+}
+}`;
   const Logout = `{
   curl Copy code curl -X POST "https://b2b-dev.idmetagroup.com/logout"
+}`;
+
+  const php5 = `{
+function logout() {
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, "https://b2b-dev.idmetagroup.com/logout");
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    return $response;
+}
 }`;
 
   const PreRequestScript = `{
@@ -191,6 +260,27 @@ const Example = () => {
     setShowTransition(hasCopied);
   }, [hasCopied]);
 
+  const php6 = `{
+  function preRequestScript() {
+    $url = "https://dashboard2.idmetagroup.com";
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HEADER, true);
+    $response = curl_exec($ch);
+    $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+    $header = substr($response, 0, $header_size);
+    preg_match('/^Set-Cookie:\s*([^;]*)/mi', $header, $matches);
+    $cookie = $matches[1];
+    curl_close($ch);
+
+    $headers = [
+        "X-XSRF-TOKEN: $cookie",
+        "Referer: https://dashboard2.idmetagroup.com"
+    ];
+    return $headers;
+}}`;
+
   return (
     <VStack
       px="4"
@@ -203,101 +293,246 @@ const Example = () => {
         CSRF Cookie
       </Text>
       <Code>Request:</Code>
-      <SyntaxHighlighter
-        customStyle={{
-          height: "100%",
-          width: "100%",
-          backgroundColor:
-            colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
-          border: "none",
-          boxShadow: "none",
-        }}
-        language="applescript"
-        style={colorMode == "dark" ? okaidia : stackoverflowLight}
-        wrapLongLines
-      >
-        {CSRFCookie}
-      </SyntaxHighlighter>
+
+      <Tabs>
+        <TabList>
+          <Tab>PHP</Tab>
+          <Tab>curl</Tab>
+        </TabList>
+
+        <TabPanels>
+          <TabPanel>
+            <SyntaxHighlighter
+              customStyle={{
+                height: "100%",
+                width: "100%",
+                backgroundColor:
+                  colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
+                border: "none",
+                boxShadow: "none",
+              }}
+              language="applescript"
+              style={colorMode == "dark" ? okaidia : stackoverflowLight}
+              wrapLongLines
+            >
+              {CSRFCookie}
+            </SyntaxHighlighter>
+          </TabPanel>
+          <TabPanel>
+            <SyntaxHighlighter
+              customStyle={{
+                height: "100%",
+                width: "100%",
+                backgroundColor:
+                  colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
+                border: "none",
+                boxShadow: "none",
+              }}
+              language="applescript"
+              style={colorMode == "dark" ? okaidia : stackoverflowLight}
+              wrapLongLines
+            >
+              {php1}
+            </SyntaxHighlighter>
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
 
       <Text fontSize="18" mt="6" w="full" textAlign="left" fontWeight={"700"}>
         User Authentication
       </Text>
       <Code>Request:</Code>
-      <SyntaxHighlighter
-        customStyle={{
-          height: "100%",
-          width: "100%",
-          backgroundColor:
-            colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
-          border: "none",
-          boxShadow: "none",
-        }}
-        language="applescript"
-        style={colorMode == "dark" ? okaidia : stackoverflowLight}
-        wrapLongLines
-      >
-        {UserAuth}
-      </SyntaxHighlighter>
+
+      <Tabs>
+        <TabList>
+          <Tab>PHP</Tab>
+          <Tab>curl</Tab>
+        </TabList>
+
+        <TabPanels>
+          <TabPanel>
+            <SyntaxHighlighter
+              customStyle={{
+                height: "100%",
+                width: "100%",
+                backgroundColor:
+                  colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
+                border: "none",
+                boxShadow: "none",
+              }}
+              language="applescript"
+              style={colorMode == "dark" ? okaidia : stackoverflowLight}
+              wrapLongLines
+            >
+              {UserAuth}
+            </SyntaxHighlighter>
+          </TabPanel>
+          <TabPanel>
+            <SyntaxHighlighter
+              customStyle={{
+                height: "100%",
+                width: "100%",
+                backgroundColor:
+                  colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
+                border: "none",
+                boxShadow: "none",
+              }}
+              language="applescript"
+              style={colorMode == "dark" ? okaidia : stackoverflowLight}
+              wrapLongLines
+            >
+              {php2}
+            </SyntaxHighlighter>
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
 
       <Text fontSize="18" mt="6" w="full" textAlign="left" fontWeight={"700"}>
         Login Request
       </Text>
       <Code>Request:</Code>
-      <SyntaxHighlighter
-        customStyle={{
-          height: "100%",
-          width: "100%",
-          backgroundColor:
-            colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
-          border: "none",
-          boxShadow: "none",
-        }}
-        language="applescript"
-        style={colorMode == "dark" ? okaidia : stackoverflowLight}
-        wrapLongLines
-      >
-        {LoginRequest}
-      </SyntaxHighlighter>
+
+      <Tabs>
+        <TabList>
+          <Tab>PHP</Tab>
+          <Tab>curl</Tab>
+        </TabList>
+
+        <TabPanels>
+          <TabPanel>
+            <SyntaxHighlighter
+              customStyle={{
+                height: "100%",
+                width: "100%",
+                backgroundColor:
+                  colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
+                border: "none",
+                boxShadow: "none",
+              }}
+              language="applescript"
+              style={colorMode == "dark" ? okaidia : stackoverflowLight}
+              wrapLongLines
+            >
+              {LoginRequest}
+            </SyntaxHighlighter>
+          </TabPanel>
+          <TabPanel>
+            <SyntaxHighlighter
+              customStyle={{
+                height: "100%",
+                width: "100%",
+                backgroundColor:
+                  colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
+                border: "none",
+                boxShadow: "none",
+              }}
+              language="applescript"
+              style={colorMode == "dark" ? okaidia : stackoverflowLight}
+              wrapLongLines
+            >
+              {php3}
+            </SyntaxHighlighter>
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
 
       <Text fontSize="18" mt="6" w="full" textAlign="left" fontWeight={"700"}>
         Retrieve User Information
       </Text>
       <Code>Request:</Code>
-      <SyntaxHighlighter
-        customStyle={{
-          height: "100%",
-          width: "100%",
-          backgroundColor:
-            colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
-          border: "none",
-          boxShadow: "none",
-        }}
-        language="applescript"
-        style={colorMode == "dark" ? okaidia : stackoverflowLight}
-        wrapLongLines
-      >
-        {RetrieveUserInformation}
-      </SyntaxHighlighter>
+
+      <Tabs>
+        <TabList>
+          <Tab>PHP</Tab>
+          <Tab>curl</Tab>
+        </TabList>
+
+        <TabPanels>
+          <TabPanel>
+            <SyntaxHighlighter
+              customStyle={{
+                height: "100%",
+                width: "100%",
+                backgroundColor:
+                  colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
+                border: "none",
+                boxShadow: "none",
+              }}
+              language="applescript"
+              style={colorMode == "dark" ? okaidia : stackoverflowLight}
+              wrapLongLines
+            >
+              {RetrieveUserInformation}
+            </SyntaxHighlighter>
+          </TabPanel>
+          <TabPanel>
+            <SyntaxHighlighter
+              customStyle={{
+                height: "100%",
+                width: "100%",
+                backgroundColor:
+                  colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
+                border: "none",
+                boxShadow: "none",
+              }}
+              language="applescript"
+              style={colorMode == "dark" ? okaidia : stackoverflowLight}
+              wrapLongLines
+            >
+              {php4}
+            </SyntaxHighlighter>
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
 
       <Text fontSize="18" mt="6" w="full" textAlign="left" fontWeight={"700"}>
         User Logout
       </Text>
       <Code>Request:</Code>
-      <SyntaxHighlighter
-        customStyle={{
-          height: "100%",
-          width: "100%",
-          backgroundColor:
-            colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
-          border: "none",
-          boxShadow: "none",
-        }}
-        language="applescript"
-        style={colorMode == "dark" ? okaidia : stackoverflowLight}
-        wrapLongLines
-      >
-        {Logout}
-      </SyntaxHighlighter>
+
+      <Tabs>
+        <TabList>
+          <Tab>PHP</Tab>
+          <Tab>curl</Tab>
+        </TabList>
+
+        <TabPanels>
+          <TabPanel>
+            <SyntaxHighlighter
+              customStyle={{
+                height: "100%",
+                width: "100%",
+                backgroundColor:
+                  colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
+                border: "none",
+                boxShadow: "none",
+              }}
+              language="applescript"
+              style={colorMode == "dark" ? okaidia : stackoverflowLight}
+              wrapLongLines
+            >
+              {Logout}
+            </SyntaxHighlighter>
+          </TabPanel>
+          <TabPanel>
+            <SyntaxHighlighter
+              customStyle={{
+                height: "100%",
+                width: "100%",
+                backgroundColor:
+                  colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
+                border: "none",
+                boxShadow: "none",
+              }}
+              language="applescript"
+              style={colorMode == "dark" ? okaidia : stackoverflowLight}
+              wrapLongLines
+            >
+              {php5}
+            </SyntaxHighlighter>
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
 
       <Text fontSize="18" mt="6" w="full" textAlign="left" fontWeight={"700"}>
         Pre-request Script for Postman
@@ -307,21 +542,50 @@ const Example = () => {
         pre-request script:
       </Text>
       <Code>Request:</Code>
-      <SyntaxHighlighter
-        customStyle={{
-          height: "100%",
-          width: "100%",
-          backgroundColor:
-            colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
-          border: "none",
-          boxShadow: "none",
-        }}
-        language="applescript"
-        style={colorMode == "dark" ? okaidia : stackoverflowLight}
-        wrapLongLines
-      >
-        {PreRequestScript}
-      </SyntaxHighlighter>
+
+      <Tabs>
+        <TabList>
+          <Tab>PHP</Tab>
+          <Tab>curl</Tab>
+        </TabList>
+
+        <TabPanels>
+          <TabPanel>
+            <SyntaxHighlighter
+              customStyle={{
+                height: "100%",
+                width: "100%",
+                backgroundColor:
+                  colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
+                border: "none",
+                boxShadow: "none",
+              }}
+              language="applescript"
+              style={colorMode == "dark" ? okaidia : stackoverflowLight}
+              wrapLongLines
+            >
+              {PreRequestScript}
+            </SyntaxHighlighter>
+          </TabPanel>
+          <TabPanel>
+            <SyntaxHighlighter
+              customStyle={{
+                height: "100%",
+                width: "100%",
+                backgroundColor:
+                  colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
+                border: "none",
+                boxShadow: "none",
+              }}
+              language="applescript"
+              style={colorMode == "dark" ? okaidia : stackoverflowLight}
+              wrapLongLines
+            >
+              {php6}
+            </SyntaxHighlighter>
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
 
       <Box pos="absolute" top="4" right={{ base: "2", xl: "2", "2xl": "2" }}>
         <IconButton

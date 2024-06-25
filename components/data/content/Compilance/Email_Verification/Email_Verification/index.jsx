@@ -17,7 +17,7 @@ import { okaidia } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { MdDone, MdOutlineCopyAll } from "react-icons/md";
 import { atomOneLight } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 
-const AML_Verification = () => {
+const Email_Risk_Verification = () => {
   const isDesktop = useBreakpointValue({ base: false, md: true });
 
   return (
@@ -43,7 +43,7 @@ const AML_Verification = () => {
   );
 };
 
-export default AML_Verification;
+export default Email_Risk_Verification;
 
 const Details = () => {
   const bgColor = useColorModeValue("gray.50", "whiteAlpha.200");
@@ -51,11 +51,11 @@ const Details = () => {
   return (
     <VStack textAlign="left" bgColor={bgColor} p="4" rounded="lg">
       <Heading fontSize="24" w="full">
-        AML Verification
+        Email Risk Verification
       </Heading>
       <Text w="full">
         Endpoint: &nbsp;
-        <Code>{` POST /v1/verification/aml`}</Code>
+        <Code>{`POST /v1/verification/emailrisk`}</Code>
         &nbsp;
       </Text>
     </VStack>
@@ -65,50 +65,26 @@ const Details = () => {
 const Example = () => {
   const jsonCode = `{
 {
-  "countries": [
-    "ID",
-    "MY"
-  ],
-  "datasets": [
-    "SAN"
-  ],
-  "dob": "1999-12-31",
-  "name": "String"
+  "recipient": "user@app.com"
 }
-
   }`;
 
   const response = `{
-  200 OK:
-{
-  "status": true,
-  "message": "OK",
-  "result": {
-      "results": {
-          "matchCount": 0,
-          "matches": []
-      }
-  }
-}
+200 OK: Verification successful.
 401 Unauthorized: Invalid or missing access token.
 Example cURL:
 
-bash curl -X 'POST' \
-  '{{baseUrl}}/v1/verification/aml' \
+bash
+ 
+curl -X 'POST' \
+  '{{baseUrl}}/v1/verification/emailrisk' \
   -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -H 'Authorization: {{accessToken}}' \
   -d '{
-    "countries": [
-      "ID",
-      "MY"
-    ],
-    "datasets": [
-      "SAN"
-    ],
-    "dob": "1999-12-31",
-    "name": "String"
+    "recipient": "user@app.com"
   }'
+
   }`;
 
   const { onCopy, hasCopied } = useClipboard(JSON.stringify(jsonCode, null, 2));

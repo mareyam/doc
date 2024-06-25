@@ -13,7 +13,7 @@ import Marriage_Certificate_Verification from "./Marriage Certificate Verificati
 import Medicare_Verification from "./Medicare Verification";
 import Passport_Verification from "./Passport_Verification";
 
-const API1 = {
+const Australia = {
   Getting_Started,
   Document_Verification,
   Passport_Verification,
@@ -30,4 +30,4 @@ const API1 = {
   AEC_Verification,
 };
 
-export default API1;
+export default Australia;

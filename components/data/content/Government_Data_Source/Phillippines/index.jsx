@@ -6,7 +6,7 @@ import NBI_Clearance_Verification from "./NBI_Clearance_Verification";
 import PRC_Verification from "./PRC_Verification";
 import UMID_SSN_Verification from "./UMID_SSN_Verification";
 
-const API5 = {
+const Philippines = {
   Overview,
   Driving_Liscense_Verification,
   UMID_SSN_Verification,
@@ -16,4 +16,4 @@ const API5 = {
   Error_Handling,
 };
 
-export default API5;
+export default Philippines;

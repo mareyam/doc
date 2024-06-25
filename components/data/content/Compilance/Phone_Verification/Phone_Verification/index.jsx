@@ -17,7 +17,7 @@ import { okaidia } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { MdDone, MdOutlineCopyAll } from "react-icons/md";
 import { atomOneLight } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 
-const Get_AML_PDF = () => {
+const Phone_Risk_Verification = () => {
   const isDesktop = useBreakpointValue({ base: false, md: true });
 
   return (
@@ -43,7 +43,7 @@ const Get_AML_PDF = () => {
   );
 };
 
-export default Get_AML_PDF;
+export default Phone_Risk_Verification;
 
 const Details = () => {
   const bgColor = useColorModeValue("gray.50", "whiteAlpha.200");
@@ -51,11 +51,11 @@ const Details = () => {
   return (
     <VStack textAlign="left" bgColor={bgColor} p="4" rounded="lg">
       <Heading fontSize="24" w="full">
-        Get AML PDF
+        Phone Risk Verification
       </Heading>
       <Text w="full">
         Endpoint: &nbsp;
-        <Code>{` GET /v1/verification/aml/{{pdfResultId}}`}</Code>
+        <Code>{`POST /v1/verification/phonerisk`}</Code>
         &nbsp;
       </Text>
     </VStack>
@@ -64,27 +64,26 @@ const Details = () => {
 
 const Example = () => {
   const jsonCode = `{
-No request body required.
-
-Headers:
-
-makefile
- 
-Accept: application/pdf
-Authorization: {{accessToken}}
+{
+  "recipient": "632468709864"
+}
 
   }`;
 
-  const response = `{
- No response example is provided in the collection.
+  const response = `{200 OK: Verification successful.
+401 Unauthorized: Invalid or missing access token.
 Example cURL:
 
 bash
  
-curl -X 'GET' \
-  '{{baseUrl}}/v1/verification/aml/{{pdfResultId}}' \
-  -H 'Accept: application/pdf' \
-  -H 'Authorization: {{accessToken}}'
+curl -X 'POST' \
+  '{{baseUrl}}/v1/verification/phonerisk' \
+  -H 'Accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: {{accessToken}}' \
+  -d '{
+    "recipient": "632468709864"
+  }'
   }`;
 
   const { onCopy, hasCopied } = useClipboard(JSON.stringify(jsonCode, null, 2));

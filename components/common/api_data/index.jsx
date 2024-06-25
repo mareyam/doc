@@ -1,10 +1,12 @@
 import API from "@/components/data/content/Getting_Started";
-import API1 from "@/components/data/content/Australia_Verification_Services";
-import API2 from "@/components/data/content/Biometrics_Verification";
-import API3 from "@/components/data/content/Compliance_Verification";
-import API4 from "@/components/data/content/QR_Code_Verification";
-import API5 from "@/components/data/content/Phillippines_Verification";
-import API6 from "@/components/data/content/Indonesia_Verification_Currently_Forbidden";
+import Document_Verification from "@/components/data/content/Compilance/Document_Verification/Document_Verification";
+import Email_Risk_Verification from "@/components/data/content/Compilance/Email_Verification/Email_Verification";
+import Phone_Risk_Verification from "@/components/data/content/Compilance/Phone_Verification/Phone_Verification";
+import Australia from "@/components/data/content/Government_Data_Source/Australia";
+import Indonesia from "@/components/data/content/Government_Data_Source/Indonesia";
+import Philippines from "@/components/data/content/Government_Data_Source/Phillippines";
+import Anti_Money_Laundering from "@/components/data/content/Compilance/Anti-Money_Laundering";
+import Biometric_Verification from "@/components/data/content/Biometrics_Verification/Biometrics_Verification";
 
 const APIData = [
   {
@@ -12,22 +14,36 @@ const APIData = [
     data: API,
   },
   {
-    name: "Documents Verification Services",
-    data: API1,
+    name: "Anti-Money Laundering",
+    data: Anti_Money_Laundering,
   },
   {
-    name: "Biometric Verification",
-    data: API5,
+    name: "Biometrics",
+    data: Biometric_Verification,
   },
   {
-    name: "Compliance Verification",
-    data: API3,
+    name: "Document Verification",
+    data: Document_Verification,
   },
-  { name: "QR Code Verification", data: API4 },
-  { name: "Philippines Verification", data: API5 },
   {
-    name: "Indonesia Verification (Currently Forbidden)",
-    data: API6,
+    name: "Email Verification",
+    data: Email_Risk_Verification,
+  },
+  {
+    name: "Phone Verification",
+    data: Phone_Risk_Verification,
+  },
+  {
+    name: "Australia",
+    data: Australia,
+  },
+  {
+    name: "Indonesia",
+    data: Indonesia,
+  },
+  {
+    name: "Philippines",
+    data: Philippines,
   },
 ];
 
