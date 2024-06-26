@@ -100,7 +100,7 @@ const SearchModal = ({}) => {
                 border="none"
                 fontSize="14"
                 placeholder="Go to..."
-                color={colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC"}
+                color={colorMode == "dark" ? "white" : "white"}
               />
             </InputGroup>
             {filteredTitles?.map((title, index) => (
