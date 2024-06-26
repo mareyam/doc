@@ -86,7 +86,7 @@ const Details = () => {
       wordBreak="break-all"
     >
       <Heading fontSize="24" w="full">
-        Document Verification Services
+        Document Verification 
       </Heading>
       <Text wrapLongLines>
         This document provides a guide on how to use the API endpoints available
