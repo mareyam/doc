@@ -4,10 +4,8 @@ import Dukcapil_Face_Match_Verification from "./Dukcapil_Face_Match_Verification
 import Error_Handling from "./Error_Handling";
 
 const Indonesia = {
-  Overview,
   Dukcapil_Verification,
   Dukcapil_Face_Match_Verification,
-  Error_Handling,
 };
 
 export default Indonesia;

@@ -19,6 +19,8 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { okaidia } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import React from "react";
 import { stackoverflowLight } from "react-syntax-highlighter/dist/cjs/styles/hljs";
+import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
+
 const Document_Verification = () => {
   const isDesktop = useBreakpointValue({ base: false, md: true });
 
@@ -277,6 +279,21 @@ const Example = () => {
   "imageSource": "string",
   "scanCroppedDocumentImage": false  
   }`;
+
+  const PjsonData = `{
+  "returnFullDocumentImage": false,
+  "returnFaceImage": false,
+  "returnSignatureImage": false,
+  "allowBlurFilter": false,
+  "allowUnparsedMrzResults": false,
+  "allowUnverifiedMrzResults": true,
+  "validateResultCharacters": true,
+  "anonymizationMode": "FULL_RESULT",
+  "anonymizeImage": true,
+  "ageLimit": 0,
+  "imageSource": "string",
+  "scanCroppedDocumentImage": false  
+}`;
 
   const response = `{
 - *200 OK*: The request was successful, and the response contains the document verification results.
@@ -605,6 +622,335 @@ curl -X POST b2b-dev.idmetagroup.com/api/v1/verification/document_verification \
   }
  }
 }`;
+
+  const Presponse = `{
+$response = '{
+  "200 OK": "The request was successful, and the response contains the document verification results.",
+  "400 Bad Request": "The request was invalid.",
+  "403 Forbidden": "Access to the resource is forbidden.",
+  "500 Internal Server Error": "The server encountered an error processing the request.",
+  "503 Service Unavailable": "The service is temporarily unavailable.",
+  "504 Gateway Time-out": "The gateway timed out while processing the request."
+}';
+
+// Sample curl request using PHP
+$url = "https://b2b-dev.idmetagroup.com/api/v1/verification/document_verification";
+$headers = [
+    "Content-Type: application/json",
+    "Accept: application/json"
+];
+
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonCode);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+echo $response;
+
+// Sample response format
+$sampleResponse = '{
+  "executionId": "string",
+  "finishTime": "string",
+  "startTime": "string",
+  "result": {
+    "dateOfBirth": {
+      "day": 0,
+      "month": 0,
+      "year": 0,
+      "successfullyParsed": true,
+      "originalString": "string"
+    },
+    "classInfo": {
+      "country": "COUNTRY_NONE",
+      "region": "REGION_NONE",
+      "type": "TYPE_NONE",
+      "countryName": "string",
+      "isoAlpha3CountryCode": "string",
+      "isoAlpha2CountryCode": "string",
+      "isoNumericCountryCode": "string"
+    },
+    "type": "string",
+    "isBelowAgeLimit": true,
+    "age": 0,
+    "recognitionStatus": "EMPTY",
+    "firstName": "string",
+    "lastName": "string",
+    "fullName": "string",
+    "address": "string",
+    "dateOfIssue": {
+      "day": 0,
+      "month": 0,
+      "year": 0,
+      "successfullyParsed": true,
+      "originalString": "string"
+    },
+    "dateOfExpiry": {
+      "day": 0,
+      "month": 0,
+      "year": 0,
+      "successfullyParsed": true,
+      "originalString": "string"
+    },
+    "documentNumber": "string",
+    "sex": "string",
+    "driverLicenseDetailedInfo": {
+      "restrictions": "string",
+      "endorsements": "string",
+      "vehicleClass": "string",
+      "conditions": "string",
+      "vehicleClassesInfo": [
+        {
+          "vehicleClass": "string",
+          "licenceType": "string",
+          "effectiveDate": {
+            "day": 0,
+            "month": 0,
+            "year": 0,
+            "successfullyParsed": true,
+            "originalString": "string"
+          },
+          "expiryDate": {
+            "day": 0,
+            "month": 0,
+            "year": 0,
+            "successfullyParsed": true,
+            "originalString": "string"
+          }
+        }
+      ]
+    },
+    "fullDocumentImageBase64": "string",
+    "faceImageBase64": "string",
+    "additionalNameInformation": "string",
+    "additionalAddressInformation": "string",
+    "additionalOptionalAddressInformation": "string",
+    "placeOfBirth": "string",
+    "nationality": "string",
+    "race": "string",
+    "religion": "string",
+    "profession": "string",
+    "maritalStatus": "string",
+    "residentialStatus": "string",
+    "employer": "string",
+    "personalIdNumber": "string",
+    "documentAdditionalNumber": "string",
+    "documentOptionalAdditionalNumber": "string",
+    "issuingAuthority": "string",
+    "mrzData": {
+      "rawMrzString": "string",
+      "documentCode": "string",
+      "issuer": "string",
+      "documentNumber": "string",
+      "opt1": "string",
+      "opt2": "string",
+      "gender": "string",
+      "nationality": "string",
+      "primaryId": "string",
+      "secondaryId": "string",
+      "alienNumber": "string",
+      "applicationReceiptNumber": "string",
+      "immigrantCaseNumber": "string",
+      "mrzVerified": true,
+      "mrzParsed": true,
+      "dateOfBirth": {
+        "day": 0,
+        "month": 0,
+        "year": 0,
+        "successfullyParsed": true,
+        "originalString": "string"
+      },
+      "dateOfExpiry": {
+        "day": 0,
+        "month": 0,
+        "year": 0,
+        "successfullyParsed": true,
+        "originalString": "string"
+      },
+      "documentType": "UNKNOWN",
+      "issuerName": "string",
+      "nationalityName": "string"
+    },
+    "conditions": "string",
+    "localizedName": "string",
+    "dateOfExpiryPermanent": true,
+    "additionalPersonalIdNumber": "string",
+    "viz": {
+      "firstName": "string",
+      "lastName": "string",
+      "fullName": "string",
+      "additionalNameInformation": "string",
+      "localizedName": "string",
+      "address": "string",
+      "additionalAddressInformation": "string",
+      "additionalOptionalAddressInformation": "string",
+      "placeOfBirth": "string",
+      "nationality": "string",
+      "race": "string",
+      "religion": "string",
+      "profession": "string",
+      "maritalStatus": "string",
+      "residentialStatus": "string",
+      "employer": "string",
+      "sex": "string",
+      "dateOfBirth": {
+        "day": 0,
+        "month": 0,
+        "year": 0,
+        "successfullyParsed": true,
+        "originalString": "string"
+      },
+      "dateOfIssue": {
+        "day": 0,
+        "month": 0,
+        "year": 0,
+        "successfullyParsed": true,
+        "originalString": "string"
+      },
+      "dateOfExpiry": {
+        "day": 0,
+        "month": 0,
+        "year": 0,
+        "successfullyParsed": true,
+        "originalString": "string"
+      },
+      "dateOfExpiryPermanent": true,
+      "documentNumber": "string",
+      "personalIdNumber": "string",
+      "documentAdditionalNumber": "string",
+      "additionalPersonalIdNumber": "string",
+      "documentOptionalAdditionalNumber": "string",
+      "issuingAuthority": "string",
+      "driverLicenseDetailedInfo": {
+        "restrictions": "string",
+        "endorsements": "string",
+        "vehicleClass": "string",
+        "conditions": "string",
+        "vehicleClassesInfo": [
+          {
+            "vehicleClass": "string",
+            "licenceType": "string",
+            "effectiveDate": {
+              "day": 0,
+              "month": 0,
+              "year": 0,
+              "successfullyParsed": true,
+              "originalString": "string"
+            },
+            "expiryDate": {
+              "day": 0,
+              "month": 0,
+              "year": 0,
+              "successfullyParsed": true,
+              "originalString": "string"
+            }
+          }
+        ]
+      },
+      "conditions": "string",
+      "fathersName": "string",
+      "mothersName": "string"
+    },
+    "barcode": {
+      "rawDataBase64": "string",
+      "stringData": "string",
+      "firstName": "string",
+      "lastName": "string",
+      "middleName": "string",
+      "fullName": "string",
+      "additionalNameInformation": "string",
+      "address": "string",
+      "placeOfBirth": "string",
+      "nationality": "string",
+      "race": "string",
+      "religion": "string",
+      "profession": "string",
+      "maritalStatus": "string",
+      "residentialStatus": "string",
+      "employer": "string",
+      "sex": "string",
+      "dateOfBirth": {
+        "day": 0,
+        "month": 0,
+        "year": 0,
+        "successfullyParsed": true,
+        "originalString": "string"
+      },
+      "dateOfIssue": {
+        "day": 0,
+        "month": 0,
+        "year": 0,
+        "successfullyParsed": true,
+        "originalString": "string"
+      },
+      "dateOfExpiry": {
+        "day": 0,
+        "month": 0,
+        "year": 0,
+        "successfullyParsed": true,
+        "originalString": "string"
+      },
+      "documentNumber": "string",
+      "personalIdNumber": "string",
+      "documentAdditionalNumber": "string",
+      "issuingAuthority": "string",
+      "addressDetailedInfo": {
+        "street": "string",
+        "postalCode": "string",
+        "city": "string",
+        "jurisdiction": "string"
+      },
+      "driverLicenseDetailedInfo": {
+        "restrictions": "string",
+        "endorsements": "string",
+        "vehicleClass": "string",
+        "conditions": "string",
+        "vehicleClassesInfo": [
+          {
+            "vehicleClass": "string",
+            "licenceType": "string",
+            "effectiveDate": {
+              "day": 0,
+              "month": 0,
+              "year": 0,
+              "successfullyParsed": true,
+              "originalString": "string"
+            },
+            "expiryDate": {
+              "day": 0,
+              "month": 0,
+              "year": 0,
+              "successfullyParsed": true,
+              "originalString": "string"
+            }
+          }
+        ]
+      },
+      "extendedElements": [
+        {
+          "key": "BARCODE_ELEMENT_KEY_DOCUMENT_TYPE",
+          "value": "string"
+        }
+      ]
+    },
+    "imageAnalysisResult": {
+      "blurred": true,
+      "documentImageColorStatus": "NOT_AVAILABLE",
+      "documentImageMoireStatus": "NOT_AVAILABLE",
+      "faceDetectionStatus": "NOT_AVAILABLE",
+      "mrzDetectionStatus": "NOT_AVAILABLE",
+      "barcodeDetectionStatus": "NOT_AVAILABLE"
+    },
+    "processingStatus": "SUCCESS",
+    "recognitionMode": "NONE",
+    "signatureImageBase64": "string",
+    "fathersName": "string",
+    "mothersName": "string"
+  }
+}`;
   const [showTransition, setShowTransition] = useState(false);
   const bgColor = useColorModeValue("gray.50", "whiteAlpha.200");
   const { colorMode } = useColorMode();
@@ -626,19 +972,48 @@ curl -X POST b2b-dev.idmetagroup.com/api/v1/verification/document_verification \
         <Code mx="4" mt="6">
           Request:
         </Code>
-        <SyntaxHighlighter
-          customStyle={{
-            height: "100%",
-            width: "100%",
-            backgroundColor:
-              colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
-          }}
-          language="applescript"
-          style={colorMode == "dark" ? okaidia : atomOneLight}
-          wrapLongLines
-        >
-          {jsonCode}
-        </SyntaxHighlighter>
+        <Tabs>
+          <TabList>
+            <Tab>CURL</Tab>
+            <Tab>PHP</Tab>
+          </TabList>
+
+          <TabPanels>
+            <TabPanel>
+              <SyntaxHighlighter
+                customStyle={{
+                  height: "100%",
+                  width: "100%",
+                  backgroundColor:
+                    colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
+                }}
+                language="applescript"
+                style={colorMode == "dark" ? okaidia : atomOneLight}
+                wrapLongLines
+              >
+                {jsonCode}
+              </SyntaxHighlighter>
+            </TabPanel>
+            <TabPanel>
+              <SyntaxHighlighter
+                customStyle={{
+                  height: "100%",
+                  width: "100%",
+                  backgroundColor:
+                    colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
+                  border: "none",
+                  boxShadow: "none",
+                }}
+                language="applescript"
+                style={colorMode == "dark" ? okaidia : stackoverflowLight}
+                wrapLongLines
+              >
+                {PjsonData}
+              </SyntaxHighlighter>
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+
         <Box pos="absolute" top="4" right={{ base: "-4", xl: "2", "2xl": "8" }}>
           <IconButton
             onClick={() => handleCopy(jsonCode)}
@@ -660,19 +1035,50 @@ curl -X POST b2b-dev.idmetagroup.com/api/v1/verification/document_verification \
 
       <Box w="full" pos="relative">
         <Code mx="4">Responses:</Code>
-        <SyntaxHighlighter
-          customStyle={{
-            height: "100%",
-            width: "100%",
-            backgroundColor:
-              colorMode == "dark" ? "transparent" : "transparent",
-          }}
-          language="applescript"
-          style={colorMode == "dark" ? okaidia : stackoverflowLight}
-          wrapLongLines
-        >
-          {response}
-        </SyntaxHighlighter>
+        <Tabs>
+          <TabList>
+            <Tab>CURL </Tab>
+            <Tab>PHP</Tab>
+          </TabList>
+
+          <TabPanels>
+            <TabPanel>
+              <SyntaxHighlighter
+                customStyle={{
+                  height: "100%",
+                  width: "100%",
+                  backgroundColor:
+                    colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
+                  border: "none",
+                  boxShadow: "none",
+                }}
+                language="applescript"
+                style={colorMode == "dark" ? okaidia : stackoverflowLight}
+                wrapLongLines
+              >
+                {response}
+              </SyntaxHighlighter>
+            </TabPanel>
+            <TabPanel>
+              <SyntaxHighlighter
+                customStyle={{
+                  height: "100%",
+                  width: "100%",
+                  backgroundColor:
+                    colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
+                  border: "none",
+                  boxShadow: "none",
+                }}
+                language="applescript"
+                style={colorMode == "dark" ? okaidia : stackoverflowLight}
+                wrapLongLines
+              >
+                {Presponse}
+              </SyntaxHighlighter>
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+        ;
         <Box pos="absolute" top="4" right={{ base: "2", xl: "2", "2xl": "2" }}>
           <IconButton
             onClick={() => handleCopy(response)}

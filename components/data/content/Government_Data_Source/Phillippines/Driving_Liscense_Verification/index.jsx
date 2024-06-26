@@ -1,5 +1,9 @@
 import { GridItem, useBreakpointValue } from "@chakra-ui/react";
 import React from "react";
+import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
+import stackoverflowLight from "react-syntax-highlighter/dist/cjs/styles/hljs/stackoverflow-light";
+
+
 const Driving_Liscense_Verification = () => {
   const isDesktop = useBreakpointValue({ base: false, md: true });
 
@@ -89,6 +93,38 @@ const Example = () => {
      "serialNumber": "123456789"
    }
   }`;
+
+  const Pjsondata = `{
+  $url = '{{baseUrl}}/v1/verification/philippines/drivinglicense';
+$accessToken = 'your_access_token';
+
+$data = [
+    'licenseNumber' => 'N01-23-456789',
+    'expirationDate' => '1999-12-31',
+    'serialNumber' => '123456789'
+];
+
+$headers = [
+    'Authorization: ' . $accessToken,
+    'Content-Type: application/json',
+    'Accept: application/json'
+];
+  }`;
+
+  const Presponse = `{
+  $ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_POST, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+$response = curl_exec($ch);
+curl_close($ch);
+
+echo $response;
+  
+  }`;
   const { onCopy, hasCopied } = useClipboard(JSON.stringify(jsonCode, null, 2));
   const [showTransition, setShowTransition] = useState(false);
   const bgColor = useColorModeValue("gray.50", "whiteAlpha.200");
@@ -101,33 +137,92 @@ const Example = () => {
   return (
     <VStack pos="relative" bgColor={bgColor} borderRadius="lg">
       <Code mt="6">Request:</Code>
-      <SyntaxHighlighter
-        customStyle={{
-          height: "100%",
-          width: "100%",
-          backgroundColor:
-            colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
-        }}
-        language="applescript"
-        style={colorMode == "dark" ? okaidia : atomOneLight}
-        wrapLongLines
-      >
-        {jsonCode}
-      </SyntaxHighlighter>
-      <Code>Responses:</Code>
-      <SyntaxHighlighter
-        customStyle={{
-          height: "100%",
-          width: "100%",
-          backgroundColor:
-            colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
-        }}
-        language="applescript"
-        style={colorMode == "dark" ? okaidia : atomOneLight}
-        wrapLongLines
-      >
-        {response}
-      </SyntaxHighlighter>
+      <Tabs>
+        <TabList>
+          <Tab>CURL</Tab>
+          <Tab>PHP</Tab>
+        </TabList>
+
+        <TabPanels>
+          <TabPanel>
+            <SyntaxHighlighter
+              customStyle={{
+                height: "100%",
+                width: "100%",
+                backgroundColor:
+                  colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
+              }}
+              language="applescript"
+              style={colorMode == "dark" ? okaidia : atomOneLight}
+              wrapLongLines
+            >
+              {jsonCode}
+            </SyntaxHighlighter>
+          </TabPanel>
+          <TabPanel>
+            <SyntaxHighlighter
+              customStyle={{
+                height: "100%",
+                width: "100%",
+                backgroundColor:
+                  colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
+                border: "none",
+                boxShadow: "none",
+              }}
+              language="applescript"
+              style={colorMode == "dark" ? okaidia : stackoverflowLight}
+              wrapLongLines
+            >
+              {Pjsondata}
+            </SyntaxHighlighter>
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
+
+      <Code w="24">Responses:</Code>
+
+      <Tabs>
+        <TabList>
+          <Tab>CURL</Tab>
+          <Tab>PHP</Tab>
+        </TabList>
+
+        <TabPanels>
+          <TabPanel>
+            <SyntaxHighlighter
+              customStyle={{
+                height: "100%",
+                width: "100%",
+                backgroundColor:
+                  colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
+              }}
+              language="applescript"
+              style={colorMode == "dark" ? okaidia : atomOneLight}
+              wrapLongLines
+            >
+              {response}
+            </SyntaxHighlighter>
+          </TabPanel>
+          <TabPanel>
+            <SyntaxHighlighter
+              customStyle={{
+                height: "100%",
+                width: "100%",
+                backgroundColor:
+                  colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
+                border: "none",
+                boxShadow: "none",
+              }}
+              language="applescript"
+              style={colorMode == "dark" ? okaidia : stackoverflowLight}
+              wrapLongLines
+            >
+              {Presponse}
+            </SyntaxHighlighter>
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
+
       <Box pos="absolute" top="4" right={{ base: "2", xl: "2", "2xl": "2" }}>
         <IconButton
           onClick={onCopy}

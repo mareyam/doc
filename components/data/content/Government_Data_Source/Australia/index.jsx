@@ -14,18 +14,16 @@ import Medicare_Verification from "./Medicare Verification";
 import Passport_Verification from "./Passport_Verification";
 
 const Australia = {
-  Getting_Started,
-  Document_Verification,
   Passport_Verification,
+  Driver_License_Verification,
+  Medicare_Verification,
   Citizenship_Verification,
+  Centrelink_Card_Verification,
   Immigration_Verification,
   Birth_Certificate_Verification,
   Death_Certificate_Verification,
-  Change_of_Name_Certificate_Verification,
   Marriage_Certificate_Verification,
-  Medicare_Verification,
-  Driver_License_Verification,
-  Centrelink_Card_Verification,
+  Change_of_Name_Certificate_Verification,
   Asic_Msic_Verification,
   AEC_Verification,
 };

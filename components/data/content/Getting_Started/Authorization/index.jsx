@@ -296,8 +296,8 @@ function logout() {
 
       <Tabs>
         <TabList>
+          <Tab>CURL</Tab>
           <Tab>PHP</Tab>
-          <Tab>curl</Tab>
         </TabList>
 
         <TabPanels>
@@ -345,8 +345,8 @@ function logout() {
 
       <Tabs>
         <TabList>
+          <Tab>CURL</Tab>
           <Tab>PHP</Tab>
-          <Tab>curl</Tab>
         </TabList>
 
         <TabPanels>
@@ -394,8 +394,8 @@ function logout() {
 
       <Tabs>
         <TabList>
+          <Tab>CURL</Tab>
           <Tab>PHP</Tab>
-          <Tab>curl</Tab>
         </TabList>
 
         <TabPanels>
@@ -443,8 +443,8 @@ function logout() {
 
       <Tabs>
         <TabList>
+          <Tab>CURL</Tab>
           <Tab>PHP</Tab>
-          <Tab>curl</Tab>
         </TabList>
 
         <TabPanels>
@@ -492,8 +492,8 @@ function logout() {
 
       <Tabs>
         <TabList>
+          <Tab>CURL</Tab>
           <Tab>PHP</Tab>
-          <Tab>curl</Tab>
         </TabList>
 
         <TabPanels>
@@ -545,8 +545,8 @@ function logout() {
 
       <Tabs>
         <TabList>
+          <Tab>CURL</Tab>
           <Tab>PHP</Tab>
-          <Tab>curl</Tab>
         </TabList>
 
         <TabPanels>

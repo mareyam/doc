@@ -13,6 +13,7 @@ import {
   Code,
   Text,
   IconButton,
+  useColorMode,
 } from "@chakra-ui/react";
 import { useStateManagementStore } from "@/components/zustand-store/state-management";
 import { CiSearch } from "react-icons/ci";
@@ -30,6 +31,7 @@ const SearchModal = ({}) => {
   } = useStateManagementStore();
   const [search, setSearch] = useState("");
   const [filteredTitles, setFilteredTitles] = useState([]);
+  const { colorMode } = useColorMode();
 
   const sidebarTitles = APIData.flatMap((apiSection) =>
     Object.keys(apiSection.data).map((key) => apiSection.data[key].name)
@@ -98,6 +100,7 @@ const SearchModal = ({}) => {
                 border="none"
                 fontSize="14"
                 placeholder="Go to..."
+                color={colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC"}
               />
             </InputGroup>
             {filteredTitles?.map((title, index) => (

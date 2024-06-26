@@ -22,7 +22,6 @@ import { okaidia } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { MdDone, MdOutlineCopyAll } from "react-icons/md";
 import { atomOneLight } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import { stackoverflowLight } from "react-syntax-highlighter/dist/cjs/styles/hljs";
-
 const AML_Verification = () => {
   const isDesktop = useBreakpointValue({ base: false, md: true });
 
@@ -166,8 +165,8 @@ bash curl -X 'POST' \
       </Code>
       <Tabs>
         <TabList>
+          <Tab>CURL</Tab>
           <Tab>PHP</Tab>
-          <Tab>curl</Tab>
         </TabList>
 
         <TabPanels>
@@ -210,8 +209,8 @@ bash curl -X 'POST' \
 
       <Tabs>
         <TabList>
+          <Tab>CURL</Tab>
           <Tab>PHP</Tab>
-          <Tab>curl</Tab>
         </TabList>
 
         <TabPanels>

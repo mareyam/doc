@@ -115,14 +115,19 @@ curl -X 'GET' \
   }, [hasCopied]);
 
   return (
-    <VStack pos="relative" bgColor={bgColor} borderRadius="lg">
-      <Code w="24" mt="6">
+    <VStack
+      alignItems="left"
+      pos="relative"
+      bgColor={bgColor}
+      borderRadius="lg"
+    >
+      <Code mx="2" w="20" mt="6">
         Request:
       </Code>
       <Tabs>
         <TabList>
+          <Tab>CURL</Tab>
           <Tab>PHP</Tab>
-          <Tab>curl</Tab>
         </TabList>
 
         <TabPanels>
@@ -161,12 +166,14 @@ curl -X 'GET' \
         </TabPanels>
       </Tabs>
 
-      <Code w="24">Responses:</Code>
+      <Code mx="2" w="24">
+        Responses:
+      </Code>
 
       <Tabs>
         <TabList>
+          <Tab>CURL</Tab>
           <Tab>PHP</Tab>
-          <Tab>curl</Tab>
         </TabList>
 
         <TabPanels>

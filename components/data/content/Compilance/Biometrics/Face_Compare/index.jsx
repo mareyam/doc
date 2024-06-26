@@ -16,10 +16,10 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { okaidia } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { MdDone, MdOutlineCopyAll } from "react-icons/md";
 import { atomOneLight } from "react-syntax-highlighter/dist/cjs/styles/hljs";
-import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
 import { stackoverflowLight } from "react-syntax-highlighter/dist/cjs/styles/hljs";
+import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
 
-const Email_Verification = () => {
+const Face_Compare = () => {
   const isDesktop = useBreakpointValue({ base: false, md: true });
 
   return (
@@ -45,7 +45,7 @@ const Email_Verification = () => {
   );
 };
 
-export default Email_Verification;
+export default Face_Compare;
 
 const Details = () => {
   const bgColor = useColorModeValue("gray.50", "whiteAlpha.200");
@@ -53,11 +53,11 @@ const Details = () => {
   return (
     <VStack textAlign="left" bgColor={bgColor} p="4" rounded="lg">
       <Heading fontSize="24" w="full">
-        Email Risk Verification
+        Face Compare
       </Heading>
       <Text w="full">
         Endpoint: &nbsp;
-        <Code>{`POST /v1/verification/emailrisk`}</Code>
+        <Code>{`POST /v1/verification/biometricsfacecompare`}</Code>
         &nbsp;
       </Text>
     </VStack>
@@ -66,62 +66,54 @@ const Details = () => {
 
 const Example = () => {
   const jsonCode = `{
+Header:
 {
-  "recipient": "user@app.com"
+  "accept": "application/json",
+  "Authorization": "{{accessToken}}"
 }
+Body (form-data):
+form
+ 
+image1=@/path/to/your/image1.jpg;type=image/jpeg
+image2=@/path/to/your/image2.png;type=image/png
   }`;
 
   const response = `{
-200 OK: Verification successful.
+200 OK: Face comparison successful.
 401 Unauthorized: Invalid or missing access token.
 Example cURL:
 
-bash
- 
-curl -X 'POST' \
-  '{{baseUrl}}/v1/verification/emailrisk' \
-  -H 'Accept: application/json' \
-  -H 'Content-Type: application/json' \
+bash curl -X 'POST' \
+  '{{baseUrl}}/v1/verification/biometricsfacecompare' \
+  -H 'accept: application/json' \
   -H 'Authorization: {{accessToken}}' \
-  -d '{
-    "recipient": "user@app.com"
-  }'
-
+  -F 'image1=@/path/to/your/image1.jpg;type=image/jpeg' \
+  -F 'image2=@/path/to/your/image2.png;type=image/png'
   }`;
 
-  const PjsonData = `{
-  "recipient": "user@app.com"
+  const PjsonCode = `{
+ Header: {
+    "accept": "application/json",
+    "Authorization": "{{accessToken}}"
+  },
+  Body (form-data): {
+    image1=@/path/to/your/image1.jpg;type=image/jpeg
+    image2=@/path/to/your/image2.png;type=image/png
+  }
+}`;
 
-  }`;
   const Presponse = `{
-  $response = '{
-  "200 OK": "Verification successful.",
-  "401 Unauthorized": "Invalid or missing access token."
-}';
+   200 OK: Face comparison successful.
+  401 Unauthorized: Invalid or missing access token.
+  Example cURL:
 
-// Sample curl request using PHP
-$baseUrl = "https://example.com"; // Replace with actual base URL
-$endpoint = "/v1/verification/emailrisk";
-$url = $baseUrl . $endpoint;
-
-$headers = [
-    "Accept: application/json",
-    "Content-Type: application/json",
-    "Authorization: Bearer YOUR_ACCESS_TOKEN" // Replace with actual access token
-];
-
-$ch = curl_init($url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonCode);
-
-$response = curl_exec($ch);
-curl_close($ch);
-
-echo $response;
-?>
-  }`;
+  bash curl -X 'POST' \
+    '{{baseUrl}}/v1/verification/biometricsfacecompare' \
+    -H 'accept: application/json' \
+    -H 'Authorization: {{accessToken}}' \
+    -F 'image1=@/path/to/your/image1.jpg;type=image/jpeg' \
+    -F 'image2=@/path/to/your/image2.png;type=image/png'
+}`;
   const { onCopy, hasCopied } = useClipboard(JSON.stringify(jsonCode, null, 2));
   const [showTransition, setShowTransition] = useState(false);
   const bgColor = useColorModeValue("gray.50", "whiteAlpha.200");
@@ -148,11 +140,9 @@ echo $response;
                 width: "100%",
                 backgroundColor:
                   colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
-                border: "none",
-                boxShadow: "none",
               }}
               language="applescript"
-              style={colorMode == "dark" ? okaidia : stackoverflowLight}
+              style={colorMode == "dark" ? okaidia : atomOneLight}
               wrapLongLines
             >
               {jsonCode}
@@ -172,12 +162,14 @@ echo $response;
               style={colorMode == "dark" ? okaidia : stackoverflowLight}
               wrapLongLines
             >
-              {PjsonData}
+              {PjsonCode}
             </SyntaxHighlighter>
           </TabPanel>
         </TabPanels>
       </Tabs>
-      <Code>Responses:</Code>
+
+      <Code w="24">Responses:</Code>
+
       <Tabs>
         <TabList>
           <Tab>CURL</Tab>
@@ -192,11 +184,9 @@ echo $response;
                 width: "100%",
                 backgroundColor:
                   colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
-                border: "none",
-                boxShadow: "none",
               }}
               language="applescript"
-              style={colorMode == "dark" ? okaidia : stackoverflowLight}
+              style={colorMode == "dark" ? okaidia : atomOneLight}
               wrapLongLines
             >
               {response}

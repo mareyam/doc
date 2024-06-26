@@ -34,9 +34,9 @@ const Sidebar = ({ titles, handleClick, currentSection }) => {
 
   const complianceApis = titles.filter((api) =>
     [
-      "Document Verification",
-      "Biometrics",
       "Anti-Money Laundering",
+      "Biometrics",
+      "Document Verification",
       "Phone Verification",
       "Email Verification",
     ].includes(api.name)
@@ -67,9 +67,12 @@ const Sidebar = ({ titles, handleClick, currentSection }) => {
         allowToggle
         variant="flushed"
         w="full"
-        overflow="hidden"
+        overflowY="scroll"
+        sx={{
+          "&::-webkit-scrollbar": { display: "none" },
+          scrollbarWidth: "none",
+        }}
       >
-        {/* Render Getting Started section */}
         {gettingStartedApis.length > 0 && (
           <Box>
             {gettingStartedApis.map((api, index) => (
@@ -141,7 +144,6 @@ const Sidebar = ({ titles, handleClick, currentSection }) => {
           </Box>
         )}
 
-        {/* Render Compliance section */}
         {complianceApis.length > 0 && (
           <Box>
             <Box>
@@ -200,11 +202,20 @@ const Sidebar = ({ titles, handleClick, currentSection }) => {
                         {api.name}
                       </Text>
                     </Box>
+                    <AccordionIcon
+                      opacity={
+                        api.name == "Anti-Money Laundering" ||
+                        api.name == "Biometrics"
+                          ? 1
+                          : 0
+                      }
+                    />
                   </AccordionButton>
-                  {isHoverSidebar == index && (
+                  {(api.name == "Biometrics" || api.name == "Biometrics") && (
                     <AccordionPanel>
                       {Object.keys(api.data).map((title, index) => (
                         <Text
+                          px="4"
                           fontSize="14"
                           key={index}
                           transition="transform 0.5s ease"
@@ -249,7 +260,6 @@ const Sidebar = ({ titles, handleClick, currentSection }) => {
           </Box>
         )}
 
-        {/* Render Gov Data section */}
         {govDataApis.length > 0 && (
           <Box>
             <Box>
