@@ -5,10 +5,11 @@ import Phone_Verification from "@/components/data/content/Compilance/Phone_Verif
 import Australia from "@/components/data/content/Government_Data_Source/Australia";
 import Indonesia from "@/components/data/content/Government_Data_Source/Indonesia";
 import Philippines from "@/components/data/content/Government_Data_Source/Phillippines";
-import Anti_Money_Laundering from "@/components/data/content/Compilance/Anti-Money_Laundering";
+import Anti_Money_Laundering from "@/components/data/content/Compilance/Anti_Money_Laundering";
 // import Biometric_Verification from "@/components/data/content/Biometrics_Verification/Biometrics_Verification";
 import Biometrics from "@/components/data/content/Compilance/Biometrics";
 import API1 from "@/components/data/content/Compilance";
+import Doc from "@/components/data/content/Compilance/Doc";
 
 const APIData = [
   {
@@ -20,7 +21,7 @@ const APIData = [
     data: API1,
   },
   {
-    name: "Anti-Money Laundering",
+    name: "Anti_Money_Laundering",
     data: Anti_Money_Laundering,
   },
   {

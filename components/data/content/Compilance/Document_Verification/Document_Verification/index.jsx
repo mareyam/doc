@@ -14,12 +14,14 @@ import {
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { MdDone, MdOutlineCopyAll } from "react-icons/md";
-import { atomOneLight } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { okaidia } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import React from "react";
 import { stackoverflowLight } from "react-syntax-highlighter/dist/cjs/styles/hljs";
-const Document_Verification = () => {
+import { atomOneLight } from "react-syntax-highlighter/dist/cjs/styles/hljs";
+import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
+
+const Documents = () => {
   const isDesktop = useBreakpointValue({ base: false, md: true });
 
   return (
@@ -45,7 +47,7 @@ const Document_Verification = () => {
   );
 };
 
-export default Document_Verification;
+export default Documents;
 
 const Details = () => {
   const bgColor = useColorModeValue("gray.50", "whiteAlpha.200");
@@ -86,7 +88,7 @@ const Details = () => {
       wordBreak="break-all"
     >
       <Heading fontSize="24" w="full">
-        Document Verification 
+        Document Verification
       </Heading>
       <Text wrapLongLines>
         This document provides a guide on how to use the API endpoints available
@@ -605,6 +607,79 @@ curl -X POST b2b-dev.idmetagroup.com/api/v1/verification/document_verification \
   }
  }
 }`;
+
+  const Pjsoncode = `{
+$requestPayload = [
+    "returnFullDocumentImage" => false,
+    "returnFaceImage" => false,
+    "returnSignatureImage" => false,
+    "allowBlurFilter" => false,
+    "allowUnparsedMrzResults" => false,
+    "allowUnverifiedMrzResults" => true,
+    "validateResultCharacters" => true,
+    "anonymizationMode" => "FULL_RESULT",
+    "anonymizeImage" => true,
+    "ageLimit" => 0,
+    "imageSource" => "string",
+    "scanCroppedDocumentImage" => false
+];
+}`;
+  const Presponse = `{
+$response = '{
+- *200 OK*: The request was successful, and the response contains the document verification results.
+- *400 Bad Request*: The request was invalid.
+- *403 Forbidden*: Access to the resource is forbidden.
+- *500 Internal Server Error*: The server encountered an error processing the request.
+- *503 Service Unavailable*: The service is temporarily unavailable.
+- *504 Gateway Time-out*: The gateway timed out while processing the request.
+}';
+
+$curl = curl_init();
+
+$data = array(
+    "returnFullDocumentImage" => false,
+    "returnFaceImage" => false,
+    "returnSignatureImage" => false,
+    "allowBlurFilter" => false,
+    "allowUnparsedMrzResults" => false,
+    "allowUnverifiedMrzResults" => true,
+    "validateResultCharacters" => true,
+    "anonymizationMode" => "FULL_RESULT",
+    "anonymizeImage" => true,
+    "ageLimit" => 0,
+    "imageSource" => "string",
+    "scanCroppedDocumentImage" => false
+);
+
+$jsonData = json_encode($data);
+
+curl_setopt_array($curl, array(
+    CURLOPT_URL => "https://b2b-dev.idmetagroup.com/api/v1/verification/document_verification",
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => "",
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 30,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => "POST",
+    CURLOPT_POSTFIELDS => $jsonData,
+    CURLOPT_HTTPHEADER => array(
+        "Content-Type: application/json",
+        "Accept: application/json"
+    ),
+));
+
+$response = curl_exec($curl);
+$err = curl_error($curl);
+
+curl_close($curl);
+
+if ($err) {
+    echo "cURL Error #:" . $err;
+} else {
+    echo $response;
+}
+
+}`;
   const [showTransition, setShowTransition] = useState(false);
   const bgColor = useColorModeValue("gray.50", "whiteAlpha.200");
   const { colorMode } = useColorMode();
@@ -626,70 +701,93 @@ curl -X POST b2b-dev.idmetagroup.com/api/v1/verification/document_verification \
         <Code mx="4" mt="6">
           Request:
         </Code>
-        <SyntaxHighlighter
-          customStyle={{
-            height: "100%",
-            width: "100%",
-            backgroundColor:
-              colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
-          }}
-          language="applescript"
-          style={colorMode == "dark" ? okaidia : atomOneLight}
-          wrapLongLines
-        >
-          {jsonCode}
-        </SyntaxHighlighter>
-        <Box pos="absolute" top="4" right={{ base: "-4", xl: "2", "2xl": "8" }}>
-          <IconButton
-            onClick={() => handleCopy(jsonCode)}
-            aria-label={
-              hasCopied && currentCode == jsonCode ? "Copied" : "Copy"
-            }
-            icon={
-              hasCopied && currentCode == jsonCode ? (
-                <MdDone />
-              ) : (
-                <MdOutlineCopyAll />
-              )
-            }
-            bgColor="transparent"
-            transition={showTransition ? "all 0.5s ease" : "none"}
-          />
-        </Box>
-      </Box>
+        <Tabs>
+          <TabList>
+            <Tab>CURL</Tab>
+            <Tab>PHP</Tab>
+          </TabList>
 
-      <Box w="full" pos="relative">
-        <Code mx="4">Responses:</Code>
-        <SyntaxHighlighter
-          customStyle={{
-            height: "100%",
-            width: "100%",
-            backgroundColor:
-              colorMode == "dark" ? "transparent" : "transparent",
-          }}
-          language="applescript"
-          style={colorMode == "dark" ? okaidia : stackoverflowLight}
-          wrapLongLines
-        >
-          {response}
-        </SyntaxHighlighter>
-        <Box pos="absolute" top="4" right={{ base: "2", xl: "2", "2xl": "2" }}>
-          <IconButton
-            onClick={() => handleCopy(response)}
-            aria-label={
-              hasCopied && currentCode == response ? "Copied" : "Copy"
-            }
-            icon={
-              hasCopied && currentCode == response ? (
-                <MdDone />
-              ) : (
-                <MdOutlineCopyAll />
-              )
-            }
-            bgColor="transparent"
-            transition={showTransition ? "all 0.5s ease" : "none"}
-          />
-        </Box>
+          <TabPanels>
+            <TabPanel>
+              <SyntaxHighlighter
+                customStyle={{
+                  height: "100%",
+                  width: "100%",
+                  backgroundColor:
+                    colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
+                  border: "none",
+                  boxShadow: "none",
+                }}
+                language="applescript"
+                style={colorMode == "dark" ? okaidia : stackoverflowLight}
+                wrapLongLines
+              >
+                {jsonData}
+              </SyntaxHighlighter>
+            </TabPanel>
+            <TabPanel>
+              <SyntaxHighlighter
+                customStyle={{
+                  height: "100%",
+                  width: "100%",
+                  backgroundColor:
+                    colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
+                  border: "none",
+                  boxShadow: "none",
+                }}
+                language="applescript"
+                style={colorMode == "dark" ? okaidia : stackoverflowLight}
+                wrapLongLines
+              >
+                {PjsonCode}
+              </SyntaxHighlighter>
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+        <Code>Responses:</Code>
+        <Tabs>
+          <TabList>
+            <Tab>CURL</Tab>
+            <Tab>PHP</Tab>
+          </TabList>
+
+          <TabPanels>
+            <TabPanel>
+              <SyntaxHighlighter
+                customStyle={{
+                  height: "100%",
+                  width: "100%",
+                  backgroundColor:
+                    colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
+                  border: "none",
+                  boxShadow: "none",
+                }}
+                language="applescript"
+                style={colorMode == "dark" ? okaidia : stackoverflowLight}
+                wrapLongLines
+              >
+                {response}
+              </SyntaxHighlighter>
+            </TabPanel>
+            <TabPanel>
+              <SyntaxHighlighter
+                customStyle={{
+                  height: "100%",
+                  width: "100%",
+                  backgroundColor:
+                    colorMode == "dark" ? "RGBA(0, 0, 0, 0.04)" : "#F7FAFC",
+                  border: "none",
+                  boxShadow: "none",
+                }}
+                language="applescript"
+                style={colorMode == "dark" ? okaidia : stackoverflowLight}
+                wrapLongLines
+              >
+                {Presponse}
+              </SyntaxHighlighter>
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
       </Box>
     </VStack>
   );

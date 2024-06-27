@@ -220,7 +220,7 @@ echo $response;
           </TabPanel>
         </TabPanels>
       </Tabs>
-      ;
+      
       <Box pos="absolute" top="4" right={{ base: "2", xl: "2", "2xl": "2" }}>
         <IconButton
           onClick={onCopy}

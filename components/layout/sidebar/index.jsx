@@ -10,11 +10,6 @@ import {
   VStack,
   useColorModeValue,
   Box,
-  Tabs,
-  TabList,
-  Tab,
-  TabPanels,
-  TabPanel,
 } from "@chakra-ui/react";
 import Header from "./Header";
 import { useStateManagementStore } from "@/components/zustand-store/state-management";
@@ -34,8 +29,9 @@ const Sidebar = ({ titles, handleClick, currentSection }) => {
 
   const complianceApis = titles.filter((api) =>
     [
-      "Anti-Money Laundering",
+      "Anti_Money_Laundering",
       "Biometrics",
+      "Doc",
       "Document Verification",
       "Phone Verification",
       "Email Verification",
@@ -90,6 +86,10 @@ const Sidebar = ({ titles, handleClick, currentSection }) => {
                         color={color}
                         fontSize={{ lg: "1.1rem" }}
                         py="2"
+                        onClick={() => {
+                          handleClick("compliance", api.title);
+                          setSelectedMenu(api.title);
+                        }}
                       >
                         {api.name}
                       </Text>
@@ -167,15 +167,16 @@ const Sidebar = ({ titles, handleClick, currentSection }) => {
                   <AccordionButton justifyContent="space-between">
                     <Box>
                       <Text
-                        onClick={() => {
-                          handleClick("Compilance", api.title);
-                          setSelectedMenu(api.title);
-                        }}
+                        // onClick={() => {
+                        //   handleClick("compliance", api.title);
+                        //   setSelectedMenu(api.title);
+                        // }}
                         fontSize="14"
                         key={index}
                         transition="transform 0.5s ease"
                         cursor="pointer"
                         rounded="md"
+                        color="pink"
                         _hover={{
                           color: { color },
                           transform: "translateX(2%)",
@@ -184,13 +185,13 @@ const Sidebar = ({ titles, handleClick, currentSection }) => {
                           (api.name === selectedMenu && "translateX(2%)") ||
                           (api.name === currentSection && "translateX(2%)")
                         }
-                        color={
-                          api.name === selectedMenu
-                            ? color
-                            : undefined || api.name === currentSection
-                            ? color
-                            : undefined
-                        }
+                        // color={
+                        //   api.name === selectedMenu
+                        //     ? color
+                        //     : undefined || api.name === currentSection
+                        //     ? color
+                        //     : undefined
+                        // }
                         fontWeight={
                           api.name === selectedMenu
                             ? "500"
@@ -202,58 +203,50 @@ const Sidebar = ({ titles, handleClick, currentSection }) => {
                         {api.name}
                       </Text>
                     </Box>
-                    <AccordionIcon
-                      opacity={
-                        api.name == "Anti-Money Laundering" ||
-                        api.name == "Biometrics"
-                          ? 1
-                          : 0
-                      }
-                    />
+                    <AccordionIcon />
                   </AccordionButton>
-                  {(api.name == "Biometrics" || api.name == "Biometrics") && (
-                    <AccordionPanel>
-                      {Object.keys(api.data).map((title, index) => (
-                        <Text
-                          px="4"
-                          fontSize="14"
-                          key={index}
-                          transition="transform 0.5s ease"
-                          cursor="pointer"
-                          rounded="md"
-                          _hover={{
-                            color: { color },
-                            transform: "translateX(2%)",
-                          }}
-                          onClick={() => {
-                            handleClick(api.name, title);
-                            setSelectedMenu(title);
-                          }}
-                          transform={
-                            (title === selectedMenu && "translateX(2%)") ||
-                            (title === currentSection && "translateX(2%)")
-                          }
-                          py="1"
-                          color={
-                            title === selectedMenu
-                              ? color
-                              : undefined || title === currentSection
-                              ? color
-                              : undefined
-                          }
-                          fontWeight={
-                            title === selectedMenu
-                              ? "500"
-                              : "400" || title === currentSection
-                              ? "500"
-                              : "400"
-                          }
-                        >
-                          <FormattedTitles title={title} />
-                        </Text>
-                      ))}
-                    </AccordionPanel>
-                  )}
+                  <AccordionPanel>
+                    {Object.keys(api.data).map((title, index) => (
+                      <Text
+                        px="4"
+                        fontSize="14"
+                        key={index}
+                        transition="transform 0.5s ease"
+                        cursor="pointer"
+                        rounded="md"
+                        _hover={{
+                          color: { color },
+                          transform: "translateX(2%)",
+                        }}
+                        onClick={() => {
+                          handleClick(api.name, title);
+                          setSelectedMenu(title);
+                        }}
+                        transform={
+                          (title === selectedMenu && "translateX(2%)") ||
+                          (title === currentSection && "translateX(2%)")
+                        }
+                        py="1"
+                        // color={
+                        //   title === selectedMenu
+                        //     ? color
+                        //     : undefined || title === currentSection
+                        //     ? color
+                        //     : undefined
+                        // }
+                        color="blue"
+                        fontWeight={
+                          title === selectedMenu
+                            ? "500"
+                            : "400" || title === currentSection
+                            ? "500"
+                            : "400"
+                        }
+                      >
+                        <FormattedTitles title={title} />
+                      </Text>
+                    ))}
+                  </AccordionPanel>
                 </>
               </AccordionItem>
             ))}
@@ -283,10 +276,11 @@ const Sidebar = ({ titles, handleClick, currentSection }) => {
                   <AccordionButton justifyContent="space-between">
                     <Box>
                       <Text
-                        color={color}
+                        // color={color}
                         fontWeight="500"
                         fontSize={{ lg: "1.05rem" }}
                         textAlign="left"
+                        color="pink"
                       >
                         {api.name}
                       </Text>
@@ -315,13 +309,14 @@ const Sidebar = ({ titles, handleClick, currentSection }) => {
                             (title === currentSection && "translateX(2%)")
                           }
                           py="1"
-                          color={
-                            title === selectedMenu
-                              ? color
-                              : undefined || title === currentSection
-                              ? color
-                              : undefined
-                          }
+                          // color={
+                          //   title === selectedMenu
+                          //     ? color
+                          //     : undefined || title === currentSection
+                          //     ? color
+                          //     : undefined
+                          // }
+                          color="blue"
                           fontWeight={
                             title === selectedMenu
                               ? "500"
