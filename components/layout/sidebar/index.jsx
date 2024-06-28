@@ -31,8 +31,7 @@ const Sidebar = ({ titles, handleClick, currentSection }) => {
     [
       "Anti_Money_Laundering",
       "Biometrics",
-      "Doc",
-      "Document Verification",
+      "Documents Verification",
       "Phone Verification",
       "Email Verification",
     ].includes(api.name)
@@ -83,9 +82,9 @@ const Sidebar = ({ titles, handleClick, currentSection }) => {
                     <Box ml="-4">
                       <Text
                         fontWeight="bold"
-                        color={color}
+                        color={selectedMenu == api.title ? "white" : color}
                         fontSize={{ lg: "1.1rem" }}
-                        py="2"
+                        // py="2"
                         onClick={() => {
                           handleClick("compliance", api.title);
                           setSelectedMenu(api.title);
@@ -94,7 +93,6 @@ const Sidebar = ({ titles, handleClick, currentSection }) => {
                         {api.name}
                       </Text>
                     </Box>
-                    <AccordionIcon />
                   </AccordionButton>
                   {isHoverSidebar == index && (
                     <AccordionPanel>
@@ -117,7 +115,6 @@ const Sidebar = ({ titles, handleClick, currentSection }) => {
                             (title === selectedMenu && "translateX(2%)") ||
                             (title === currentSection && "translateX(2%)")
                           }
-                          py="1"
                           color={
                             title === selectedMenu
                               ? color
@@ -151,7 +148,7 @@ const Sidebar = ({ titles, handleClick, currentSection }) => {
                 fontWeight="bold"
                 color={color}
                 fontSize={{ lg: "1.1rem" }}
-                py="2"
+                // py="2"
               >
                 Compliance
               </Text>
@@ -176,7 +173,7 @@ const Sidebar = ({ titles, handleClick, currentSection }) => {
                         transition="transform 0.5s ease"
                         cursor="pointer"
                         rounded="md"
-                        color="pink"
+                        color={color === "dark" ? "white" : "green.500"}
                         _hover={{
                           color: { color },
                           transform: "translateX(2%)",
@@ -227,14 +224,13 @@ const Sidebar = ({ titles, handleClick, currentSection }) => {
                           (title === currentSection && "translateX(2%)")
                         }
                         py="1"
-                        // color={
-                        //   title === selectedMenu
-                        //     ? color
-                        //     : undefined || title === currentSection
-                        //     ? color
-                        //     : undefined
-                        // }
-                        color="blue"
+                        color={
+                          title === selectedMenu
+                            ? color
+                            : undefined || title === currentSection
+                            ? color
+                            : undefined
+                        }
                         fontWeight={
                           title === selectedMenu
                             ? "500"
@@ -242,6 +238,7 @@ const Sidebar = ({ titles, handleClick, currentSection }) => {
                             ? "500"
                             : "400"
                         }
+                        // color={selectedMenu == title ? "white" : color}
                       >
                         <FormattedTitles title={title} />
                       </Text>
@@ -260,7 +257,7 @@ const Sidebar = ({ titles, handleClick, currentSection }) => {
                 fontWeight="bold"
                 color={color}
                 fontSize={{ lg: "1.1rem" }}
-                py="2"
+                // py="2"
               >
                 Government Data Source
               </Text>
@@ -280,7 +277,7 @@ const Sidebar = ({ titles, handleClick, currentSection }) => {
                         fontWeight="500"
                         fontSize={{ lg: "1.05rem" }}
                         textAlign="left"
-                        color="pink"
+                        color={color === "dark" ? "white" : "green.500"}
                       >
                         {api.name}
                       </Text>
@@ -292,6 +289,7 @@ const Sidebar = ({ titles, handleClick, currentSection }) => {
                       {Object.keys(api.data).map((title, index) => (
                         <Text
                           fontSize="14"
+                          pl="4"
                           key={index}
                           transition="transform 0.5s ease"
                           cursor="pointer"
@@ -309,14 +307,13 @@ const Sidebar = ({ titles, handleClick, currentSection }) => {
                             (title === currentSection && "translateX(2%)")
                           }
                           py="1"
-                          // color={
-                          //   title === selectedMenu
-                          //     ? color
-                          //     : undefined || title === currentSection
-                          //     ? color
-                          //     : undefined
-                          // }
-                          color="blue"
+                          color={
+                            title === selectedMenu
+                              ? color
+                              : undefined || title === currentSection
+                              ? color
+                              : undefined
+                          }
                           fontWeight={
                             title === selectedMenu
                               ? "500"

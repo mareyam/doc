@@ -17,8 +17,9 @@ import { okaidia } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { MdDone, MdOutlineCopyAll } from "react-icons/md";
 import { atomOneLight } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
+import { stackoverflowLight } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 
-const Email_Verification = () => {
+const Emaill = () => {
   const isDesktop = useBreakpointValue({ base: false, md: true });
 
   return (
@@ -44,13 +45,20 @@ const Email_Verification = () => {
   );
 };
 
-export default Email_Verification;
+export default Emaill;
 
 const Details = () => {
   const bgColor = useColorModeValue("gray.50", "whiteAlpha.200");
 
   return (
-    <VStack textAlign="left" bgColor={bgColor} p="4" rounded="lg">
+    <VStack
+      px="4"
+      alignItems="flex-start"
+      textAlign="left"
+      bgColor={bgColor}
+      p="4"
+      rounded="lg"
+    >
       <Heading fontSize="24" w="full">
         Email Risk Verification
       </Heading>
@@ -131,7 +139,13 @@ echo $response;
   }, [hasCopied]);
 
   return (
-    <VStack pos="relative" bgColor={bgColor} borderRadius="lg">
+    <VStack
+      px="4"
+      alignItems="flex-start"
+      pos="relative"
+      bgColor={bgColor}
+      borderRadius="lg"
+    >
       <Code mt="6">Request:</Code>
       <Tabs>
         <TabList>
@@ -154,7 +168,7 @@ echo $response;
               style={colorMode == "dark" ? okaidia : stackoverflowLight}
               wrapLongLines
             >
-              {jsonData}
+              {jsonCode}
             </SyntaxHighlighter>
           </TabPanel>
           <TabPanel>
@@ -220,7 +234,7 @@ echo $response;
           </TabPanel>
         </TabPanels>
       </Tabs>
-      
+
       <Box pos="absolute" top="4" right={{ base: "2", xl: "2", "2xl": "2" }}>
         <IconButton
           onClick={onCopy}

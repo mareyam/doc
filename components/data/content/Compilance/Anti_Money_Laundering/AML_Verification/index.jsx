@@ -159,8 +159,9 @@ bash curl -X 'POST' \
       pos="relative"
       bgColor={bgColor}
       borderRadius="lg"
+      px="4"
     >
-      <Code w="24" mt="6">
+      <Code w="fit-content" mt="6">
         Request:
       </Code>
       <Tabs>
@@ -205,7 +206,7 @@ bash curl -X 'POST' \
         </TabPanels>
       </Tabs>
 
-      <Code w="24">Responses:</Code>
+      <Code w="fit-content">Responses:</Code>
 
       <Tabs>
         <TabList>

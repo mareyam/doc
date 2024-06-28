@@ -166,7 +166,7 @@ curl -X 'GET' \
         </TabPanels>
       </Tabs>
 
-      <Code mx="2" w="24">
+      <Code mx="2" w="fit-content">
         Responses:
       </Code>
 

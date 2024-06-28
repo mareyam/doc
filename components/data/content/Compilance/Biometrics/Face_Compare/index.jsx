@@ -168,7 +168,7 @@ bash curl -X 'POST' \
         </TabPanels>
       </Tabs>
 
-      <Code w="24">Responses:</Code>
+      <Code w="fit-content">Responses:</Code>
 
       <Tabs>
         <TabList>

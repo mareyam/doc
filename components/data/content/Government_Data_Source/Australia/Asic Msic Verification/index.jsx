@@ -117,7 +117,7 @@ curl -X 'POST' \
       }'
   }`;
 
-   const Pjsondata = `{
+  const Pjsondata = `{
    $url = '{{baseUrl}}/v1/verification/australia/asic_msic';
 $accessToken = 'your_access_token';
 
@@ -136,7 +136,7 @@ $headers = [
 ];
 
   }`;
-   const Presponse = `{
+  const Presponse = `{
    $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_POST, 1);
@@ -160,7 +160,13 @@ echo $response;
   }, [hasCopied]);
 
   return (
-    <VStack pos="relative" bgColor={bgColor} borderRadius="lg">
+    <VStack
+      px="4"
+      alignItems="flex-start"
+      pos="relative"
+      bgColor={bgColor}
+      borderRadius="lg"
+    >
       <Code mt="6">Request:</Code>
       <Tabs>
         <TabList>
@@ -204,7 +210,7 @@ echo $response;
         </TabPanels>
       </Tabs>
 
-      <Code w="24">Responses:</Code>
+      <Code w="fit-content">Responses:</Code>
 
       <Tabs>
         <TabList>

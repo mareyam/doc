@@ -132,7 +132,13 @@ echo $response;
   }, [hasCopied]);
 
   return (
-    <VStack pos="relative" bgColor={bgColor} borderRadius="lg">
+    <VStack
+      px="4"
+      alignItems="flex-start"
+      pos="relative"
+      bgColor={bgColor}
+      borderRadius="lg"
+    >
       <Code mt="6">Request:</Code>
       <Tabs>
         <TabList>

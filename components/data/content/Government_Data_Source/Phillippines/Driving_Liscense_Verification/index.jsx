@@ -3,7 +3,6 @@ import React from "react";
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
 import stackoverflowLight from "react-syntax-highlighter/dist/cjs/styles/hljs/stackoverflow-light";
 
-
 const Driving_Liscense_Verification = () => {
   const isDesktop = useBreakpointValue({ base: false, md: true });
 
@@ -135,7 +134,13 @@ echo $response;
   }, [hasCopied]);
 
   return (
-    <VStack pos="relative" bgColor={bgColor} borderRadius="lg">
+    <VStack
+      px="4"
+      alignItems="flex-start"
+      pos="relative"
+      bgColor={bgColor}
+      borderRadius="lg"
+    >
       <Code mt="6">Request:</Code>
       <Tabs>
         <TabList>
@@ -179,7 +184,7 @@ echo $response;
         </TabPanels>
       </Tabs>
 
-      <Code w="24">Responses:</Code>
+      <Code w="fit-content">Responses:</Code>
 
       <Tabs>
         <TabList>

@@ -129,7 +129,13 @@ echo $response;
   }, [hasCopied]);
 
   return (
-    <VStack pos="relative" bgColor={bgColor} borderRadius="lg">
+    <VStack
+      px="4"
+      alignItems="flex-start"
+      pos="relative"
+      bgColor={bgColor}
+      borderRadius="lg"
+    >
       <Code mt="6">Request:</Code>
       <Tabs>
         <TabList>
@@ -173,7 +179,7 @@ echo $response;
         </TabPanels>
       </Tabs>
 
-      <Code w="24">Responses:</Code>
+      <Code w="fit-content">Responses:</Code>
 
       <Tabs>
         <TabList>

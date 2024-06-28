@@ -49,7 +49,14 @@ const Details = () => {
   const bgColor = useColorModeValue("gray.50", "whiteAlpha.200");
 
   return (
-    <VStack textAlign="left" bgColor={bgColor} p="4" rounded="lg">
+    <VStack
+      px="4"
+      alignItems="flex-start"
+      textAlign="left"
+      bgColor={bgColor}
+      p="4"
+      rounded="lg"
+    >
       <Heading fontSize="24" w="full">
         UMID SSN Verification
       </Heading>
@@ -94,7 +101,13 @@ curl -X 'POST' \
   }, [hasCopied]);
 
   return (
-    <VStack pos="relative" bgColor={bgColor} borderRadius="lg">
+    <VStack
+      px="4"
+      alignItems="flex-start"
+      pos="relative"
+      bgColor={bgColor}
+      borderRadius="lg"
+    >
       <Code mt="6">Request:</Code>
       <SyntaxHighlighter
         customStyle={{
